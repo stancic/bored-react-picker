@@ -1,0 +1,18 @@
+.loading-title-container {
+  font-family: "Roboto", sans-serif;
+  font-size: 5rem;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background-color: black;
+  overflow: hidden;
+  .loading-title {
+    position: fixed;
+    margin-right: -200%;
+    overflow: hidden;
+    transition: 0.5s all ease;
+  }
+}
