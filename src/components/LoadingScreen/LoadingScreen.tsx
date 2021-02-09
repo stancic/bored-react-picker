@@ -1,30 +1,16 @@
-import React, { FunctionComponent, useEffect, useState } from "react";
+import React, { FunctionComponent, useContext } from "react";
+import { TitleStateContext } from "../Context/TitleStateContext";
 
 // Styles
 import "./LoadingScreen.scss";
 
 const LoadingScreen: FunctionComponent = () => {
-  const [titleRoll, setTitleRoll] = useState<boolean>(true);
-  useEffect(() => {
-    setTimeout(() => {
-      setTitleRoll(false);
-    }, 1000);
-    return () => {
-      setTitleRoll(true);
-    };
-  }, []);
+  const titleState = useContext(TitleStateContext);
 
   return (
-    <div>
-      <div className="loading-title-container">
-        <h1
-          className="loading-title"
-          style={titleRoll ? { opacity: "1" } : { opacity: "0" }}
-        >
-          Bored?
-        </h1>
-      </div>
-    </div>
+    <h1 className="loading-title" style={titleState ? { opacity: 1 } : {}}>
+      Bored?
+    </h1>
   );
 };
 
