@@ -1,12 +1,12 @@
 import React from "react";
 
 // Components
-import LoadingScreen from "./components/LoadingScreen/LoadingScreen";
+import ChooseCategory from "./components/ChooseCategory/ChooseCategory";
 
 const App = () => {
   return (
     <div className="App">
-      <LoadingScreen />
+      <ChooseCategory />
     </div>
   );
 };
