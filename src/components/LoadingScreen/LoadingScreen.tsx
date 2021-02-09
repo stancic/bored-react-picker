@@ -1,19 +1,25 @@
-import React, { useState } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 
 // Styles
 import "./LoadingScreen.scss";
 
-const LoadingScreen: React.FC = () => {
-  const [titleRoll, setTitleRoll] = useState<boolean>(false);
-  setTimeout(() => {
-    setTitleRoll(true);
-  }, 1000);
+const LoadingScreen: FunctionComponent = () => {
+  const [titleRoll, setTitleRoll] = useState<boolean>(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setTitleRoll(false);
+    }, 1000);
+    return () => {
+      setTitleRoll(true);
+    };
+  }, []);
+
   return (
     <div>
       <div className="loading-title-container">
         <h1
           className="loading-title"
-          style={titleRoll ? { marginRight: 0 } : {}}
+          style={titleRoll ? { opacity: "1" } : { opacity: "0" }}
         >
           Bored?
         </h1>
