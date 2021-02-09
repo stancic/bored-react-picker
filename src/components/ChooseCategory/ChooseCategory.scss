@@ -1,0 +1,19 @@
+.category-choice-container {
+  font-family: "Roboto", sans-serif;
+  font-size: 5rem;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background-color: black;
+  overflow: hidden;
+  position: relative;
+  .form-container {
+    transition: 1s ease all;
+    position: absolute;
+    z-index: 6;
+    opacity: 0;
+  }
+}
