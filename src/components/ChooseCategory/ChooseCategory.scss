@@ -13,10 +13,4 @@
   transition-property: visibility, opacity, height;
   transition-duration: 1s, 1s, 1s;
   transition-delay: 0s, 0s, 1s;
-  .form-container {
-    transition: opacity 1s;
-    position: absolute;
-    z-index: 6;
-    opacity: 0;
-  }
 }
