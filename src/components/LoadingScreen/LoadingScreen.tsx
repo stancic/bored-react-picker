@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useContext } from "react";
-import { TitleStateContext } from "../Context/TitleStateContext";
+import { TitleStateContext } from "../Context/Context";
 
 // Styles
 import "./LoadingScreen.scss";
