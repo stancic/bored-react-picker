@@ -2,7 +2,6 @@ import React, {
   FunctionComponent,
   useEffect,
   useReducer,
-  useRef,
   useState,
 } from "react";
 
