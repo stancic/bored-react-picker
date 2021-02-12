@@ -119,41 +119,51 @@ const InitializeMovieForm: FunctionComponent<{ onMoviesUpdate: any }> = ({
     onMoviesUpdate(movies, year, genreID);
   }, [onMoviesUpdate, movies, year, genreID]);
   return (
-    <div
-      className="form-container"
-      style={!titleShowState ? { opacity: 1 } : {}}
-    >
-      <form action="#">
-        <select
-          name="category"
-          id="category"
-          onChange={(e) => {
-            chooseGenre(e);
-          }}
-        >
-          {genres ? (
-            genres.map((genre) => (
-              <option key={genre.id} value={genre.name}>
-                {genre.name}
-              </option>
-            ))
-          ) : (
-            <option value="">Loading...</option>
-          )}
-        </select>
-        <input
-          type="number"
-          name="year"
-          placeholder="Year"
-          onChange={({ target }) => {
-            setYearHelper(Number(target.value));
-          }}
-        />
-        <button type="button" onClick={() => showMovies()}>
-          FIND MOVIES
-        </button>
-      </form>
-    </div>
+    <>
+      <div
+        className="form-container"
+        style={!titleShowState ? { opacity: 1 } : {}}
+      >
+        <h1>Let me recommend you something</h1>
+        <form action="#">
+          <select
+            size={1}
+            name="category"
+            id="category"
+            className="choice category-select"
+            onChange={(e) => {
+              chooseGenre(e);
+            }}
+          >
+            {genres ? (
+              genres.map((genre) => (
+                <option key={genre.id} value={genre.name}>
+                  {genre.name}
+                </option>
+              ))
+            ) : (
+              <option value="">Loading...</option>
+            )}
+          </select>
+          <input
+            type="number"
+            name="year"
+            placeholder="Year"
+            className="choice year-input"
+            onChange={({ target }) => {
+              setYearHelper(Number(target.value));
+            }}
+          />
+          <button
+            type="button"
+            onClick={() => showMovies()}
+            className="find-button"
+          >
+            FIND MOVIES
+          </button>
+        </form>
+      </div>
+    </>
   );
 };
 
