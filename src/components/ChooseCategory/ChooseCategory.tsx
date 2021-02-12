@@ -14,6 +14,7 @@ const ChooseCategory: FunctionComponent<{ onMoviesUpdate: any }> = ({
   onMoviesUpdate,
 }: any) => {
   const [titleShowState, setTitleShowState] = useState<boolean>(true); // Loading title state
+  const [pageHideState, setPageHideState] = useState<boolean>(false);
 
   useEffect(() => {
     setTimeout(() => {
@@ -24,11 +25,23 @@ const ChooseCategory: FunctionComponent<{ onMoviesUpdate: any }> = ({
     };
   }, []);
 
+  const updatePageHideStatus = (state: boolean) => {
+    setPageHideState(state);
+  };
+
   return (
-    <div className="category-choice-container">
+    <div
+      className="category-choice-container"
+      style={
+        pageHideState ? { visibility: "hidden", height: 0, opacity: 0 } : {}
+      }
+    >
       <TitleStateContext.Provider value={titleShowState}>
         <LoadingScreen />
-        <InitializeMovieForm onMoviesUpdate={onMoviesUpdate} />
+        <InitializeMovieForm
+          onMoviesUpdate={onMoviesUpdate}
+          onPageHideStatusUpdate={updatePageHideStatus}
+        />
       </TitleStateContext.Provider>
     </div>
   );
