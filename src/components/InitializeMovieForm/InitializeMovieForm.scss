@@ -3,4 +3,69 @@
   position: absolute;
   z-index: 6;
   opacity: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  top: 0;
+  margin-top: 0.5em;
+  h1 {
+    font-size: 1em;
+    letter-spacing: 4px;
+    text-align: center;
+  }
+  form {
+    border: 2px solid rgba(255, 255, 255, 0.151);
+    padding: 2rem 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Roboto", sans-serif;
+    .year-input::placeholder {
+      color: white;
+    }
+    .category-select {
+      position: relative;
+      cursor: pointer;
+      option {
+        background: black;
+      }
+    }
+    .find-button {
+      padding: 0.7rem 4rem 0.7rem 4rem;
+      margin-right: 2rem;
+      background: transparent linear-gradient(103deg, #c53cd4 0%, #4626b3 100%)
+        0% 0% no-repeat padding-box;
+      border-radius: 8px;
+      border: none;
+      opacity: 1;
+      color: black;
+      font-family: "Roboto", sans-serif;
+      font-weight: 100;
+      font-size: 1.3rem;
+      letter-spacing: 1.2px;
+      white-space: nowrap;
+      text-align: center;
+      cursor: pointer;
+      transition: ease all 0.4s;
+      border: 1.3px solid transparent;
+      &:hover {
+        border: 1.3px solid white;
+        opacity: 0.7;
+        color: white;
+      }
+    }
+  }
+  .choice {
+    font-size: 1.5rem;
+    background: transparent;
+    color: white;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.712);
+    margin: 0 2rem;
+    user-select: none;
+    overflow: auto;
+    &:focus {
+      outline: none;
+    }
+  }
 }
