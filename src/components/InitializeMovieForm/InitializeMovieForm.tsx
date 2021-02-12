@@ -37,9 +37,10 @@ const moviesReducer = (state: any, action: any) => {
   }
 };
 
-const InitializeMovieForm: FunctionComponent<{ onMoviesUpdate: any }> = ({
-  onMoviesUpdate,
-}: any) => {
+const InitializeMovieForm: FunctionComponent<{
+  onMoviesUpdate: any;
+  onPageHideStatusUpdate: any;
+}> = ({ onMoviesUpdate, onPageHideStatusUpdate }: any) => {
   const titleShowState = useContext(TitleStateContext); // Loading title state
 
   // Reducer states
@@ -53,10 +54,10 @@ const InitializeMovieForm: FunctionComponent<{ onMoviesUpdate: any }> = ({
 
   const [movies, setMovies] = useState<any>([]); // Movies state shared between components
 
-  const [year, setYear] = useState<number>(1895);
-  const [yearHelper, setYearHelper] = useState<number>(1895);
+  const [pageHideStatus, setPageHideStatus] = useState<boolean>(false);
 
-  const [pageHideState, setPageHideState] = useState<boolean>(false);
+  const [year, setYear] = useState<number>(1894);
+  const [yearHelper, setYearHelper] = useState<number>(1894);
 
   const initilaizeGenres = async () => {
     const genres = await getGenres();
@@ -90,8 +91,8 @@ const InitializeMovieForm: FunctionComponent<{ onMoviesUpdate: any }> = ({
       alert("Year should be later than 1894 and sooner than 2022!");
     } else {
       setYear(yearHelper);
+      setPageHideStatus(true);
     }
-    //setPageHideState(true);
   };
 
   // Initialize genres and animate form and title
@@ -118,6 +119,12 @@ const InitializeMovieForm: FunctionComponent<{ onMoviesUpdate: any }> = ({
   useEffect(() => {
     onMoviesUpdate(movies, year, genreID);
   }, [onMoviesUpdate, movies, year, genreID]);
+
+  // Share page hide status
+  useEffect(() => {
+    onPageHideStatusUpdate(pageHideStatus);
+  }, [onPageHideStatusUpdate, pageHideStatus]);
+
   return (
     <>
       <div
