@@ -70,7 +70,7 @@ const InitializeMovieForm: FunctionComponent<{ onMoviesUpdate: any }> = ({
     if (year && year < 1895 && year > 2021) {
       alert("WRONG YEAR INPUT");
     } else {
-      const movies = await getMovies(genre, year);
+      const movies = await getMovies(1, year, genre);
       moviesDispatch({ type: "initialize", data: movies.results });
     }
   };
@@ -116,8 +116,8 @@ const InitializeMovieForm: FunctionComponent<{ onMoviesUpdate: any }> = ({
 
   // Share movies to MoviesListing component
   useEffect(() => {
-    onMoviesUpdate(movies);
-  }, [onMoviesUpdate, movies]);
+    onMoviesUpdate(movies, year, genreID);
+  }, [onMoviesUpdate, movies, year, genreID]);
   return (
     <div
       className="form-container"
