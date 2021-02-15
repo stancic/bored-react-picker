@@ -132,7 +132,7 @@ const InitializeMovieForm: FunctionComponent<{
         style={!titleShowState ? { opacity: 1 } : {}}
       >
         <h1>Let me recommend you something</h1>
-        <form action="#">
+        <div className="form">
           <select
             size={1}
             name="category"
@@ -168,7 +168,7 @@ const InitializeMovieForm: FunctionComponent<{
           >
             FIND MOVIES
           </button>
-        </form>
+        </div>
       </div>
     </>
   );
