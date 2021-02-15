@@ -1,5 +1,4 @@
 .category-choice-container {
-  font-family: "Roboto", sans-serif;
   font-size: 5rem;
   color: white;
   display: flex;
@@ -11,6 +10,6 @@
   overflow: hidden;
   position: relative;
   transition-property: visibility, opacity, height;
-  transition-duration: 1s, 1s, 1s;
+  transition-duration: 1s, 1s, 1.2s;
   transition-delay: 0s, 0s, 1s;
 }
