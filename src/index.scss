@@ -2,11 +2,30 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
 }
 
 html,
 body {
   padding: 0;
   margin: 0;
-  background-color: #0e021f;
+  background: #111822;
+  overflow: hidden;
+}
+
+* {
+  scrollbar-color: #c53cd4;
+}
+*::-webkit-scrollbar {
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.137);
+  border-radius: 50px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #c53cd4;
+  border-radius: 50px;
 }
