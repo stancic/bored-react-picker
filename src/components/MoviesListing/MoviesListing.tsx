@@ -14,6 +14,7 @@ const MoviesListing: FunctionComponent<{
   let [loadedMovies, setLoadedMovies] = useState<any>(movies);
   let [pageNumber, setPageNumber] = useState<number>(1);
   const [loading, setLoading] = useState(true);
+  const posterPath = "https://image.tmdb.org/t/p/w200";
 
   const handleScroll = (event: any) => {
     const { scrollTop, clientHeight, scrollHeight } = event.currentTarget;
@@ -36,13 +37,24 @@ const MoviesListing: FunctionComponent<{
     loadMoreMovies();
   }, [genreID, pageNumber, year]);
 
+  console.log(loadedMovies);
+
   return (
     <div className="movies-listing-container">
       <div className="movies-listing" onScroll={handleScroll}>
         {loadedMovies.map((movie: any) => (
-          <span className="movie" key={loadedMovies.indexOf(movie)}>
-            {movie.original_title}
-          </span>
+          <div className="movie" key={loadedMovies.indexOf(movie)}>
+            <div className="movie-image-container">
+              <img
+                className="movie-image"
+                src={posterPath + movie.poster_path}
+                alt="movie poster"
+              />
+            </div>
+            <div className="movie-title-container">
+              <span className="movie-title">{movie.title}</span>
+            </div>
+          </div>
         ))}
         {loading ? <div>Loading...</div> : <div>End...</div>}
       </div>
