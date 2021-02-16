@@ -132,7 +132,6 @@ const InitializeMovieForm: FunctionComponent<{
         style={!titleShowState ? { opacity: 1 } : {}}
       >
         <h1>Let me recommend you something</h1>
-        <div className="background"></div>
         <div className="form">
           <select
             size={1}
