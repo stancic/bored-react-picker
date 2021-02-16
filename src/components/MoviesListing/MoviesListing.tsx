@@ -45,6 +45,7 @@ const MoviesListing: FunctionComponent<{
 
   return (
     <div className="movies-listing-container">
+      <h1 className="movies-listing-title">Pick a movie.</h1>
       <div className="movies-listing" onScroll={handleScroll}>
         {loadedMovies.map((movie: any) => (
           <div className="movie" key={loadedMovies.indexOf(movie)}>
