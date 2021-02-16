@@ -1,5 +1,8 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
 
+//Components
+import InitializeMovieForm from "../InitializeMovieForm/InitializeMovieForm";
+
 // Services
 import { getMovies } from "../../services/moviesServices";
 
@@ -10,7 +13,8 @@ const MoviesListing: FunctionComponent<{
   movies: any;
   year: number | undefined;
   genreID: number | undefined;
-}> = ({ movies, year, genreID }) => {
+  onMoviesUpdate: any;
+}> = ({ movies, year, genreID, onMoviesUpdate }) => {
   let [loadedMovies, setLoadedMovies] = useState<any>(movies);
   let [pageNumber, setPageNumber] = useState<number>(1);
   const [loading, setLoading] = useState(true);
@@ -57,6 +61,12 @@ const MoviesListing: FunctionComponent<{
           </div>
         ))}
         {loading ? <div>Loading...</div> : <div>End...</div>}
+      </div>
+      <div className="new-movies-form-container">
+        <InitializeMovieForm
+          onMoviesUpdate={onMoviesUpdate}
+          onPageHideStatusUpdate={() => false}
+        />
       </div>
     </div>
   );
