@@ -7,7 +7,7 @@ import MoviesListing from "./components/MoviesListing/MoviesListing";
 const App = () => {
   const [movies, setMovies] = useState<any>([]);
   const [year, setYear] = useState<number | undefined>(0);
-  const [genreID, setGenreID] = useState<number | undefined>(28);
+  const [genreID, setGenreID] = useState<number | undefined>(0);
 
   const updateMovies = (
     movie: [],
