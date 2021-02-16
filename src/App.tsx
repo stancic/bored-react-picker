@@ -25,7 +25,12 @@ const App = () => {
       </div>
 
       <div className="movies-container">
-        <MoviesListing movies={movies} year={year} genreID={genreID} />
+        <MoviesListing
+          movies={movies}
+          year={year}
+          genreID={genreID}
+          onMoviesUpdate={updateMovies}
+        />
       </div>
     </div>
   );
