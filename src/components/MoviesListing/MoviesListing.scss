@@ -1,14 +1,14 @@
 .movies-listing-container {
   width: 100%;
   height: 100vh;
-  background: black;
   display: flex;
   flex-direction: column;
   align-items: center;
-  -webkit-backdrop-filter: blur(10em);
-  backdrop-filter: blur(10em);
+  transition: background 1.3s ease-in-out;
   .movies-listing-title {
-    color: white;
+    color: rgb(255, 255, 255);
+    text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000,
+      1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
     width: 100%;
     font-size: 3em;
     margin-left: 2em;
@@ -24,6 +24,9 @@
     grid-template-rows: repeat(4, 1fr);
     border-radius: 6px;
     z-index: 20;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 2em;
     @media (max-width: 1600px) {
       grid-template-columns: repeat(4, 1fr);
     }
@@ -35,7 +38,7 @@
       justify-content: center;
       align-items: center;
       border-radius: 6px;
-      color: #cfcdd186;
+      color: white;
       .movie-image {
         cursor: pointer;
         border-radius: 10px;
@@ -71,11 +74,12 @@
       .form {
         opacity: 1;
         overflow: hidden;
-        padding: 1.2em 4em;
+        padding: 1.2em 5em;
         z-index: 5;
-        border: 1px solid rgba(255, 255, 255, 0.26);
-        border-bottom: none;
-        border-radius: 5px 5px 0 0;
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: none;
+        border-radius: 10px 10px 0 0;
         .find-button {
           padding: 0.6rem 2rem 0.6rem 2rem;
           font-size: 1.2em;
