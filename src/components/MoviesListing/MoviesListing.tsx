@@ -2,6 +2,8 @@ import React, { FunctionComponent, useEffect, useState } from "react";
 
 //Components
 import InitializeMovieForm from "../InitializeMovieForm/InitializeMovieForm";
+import MovieDetail from "../MovieDetail/MovieDetail";
+import { AiOutlineClose } from "react-icons/ai";
 
 // Services
 import { getMovies } from "../../services/moviesServices";
@@ -15,9 +17,10 @@ const MoviesListing: FunctionComponent<{
   genreID: number | undefined;
   onMoviesUpdate: any;
 }> = ({ movies, year, genreID, onMoviesUpdate }) => {
-  let [loadedMovies, setLoadedMovies] = useState<any>(movies);
-  let [movieTitle, setMovieTitle] = useState<string>("");
-  let [pageNumber, setPageNumber] = useState<number>(1);
+  const [loadedMovies, setLoadedMovies] = useState<any>(movies);
+  const [movieTitle, setMovieTitle] = useState<string>("");
+  const [pageNumber, setPageNumber] = useState<number>(1);
+  const [movieDetail, setMovieDetail] = useState<any>(undefined);
   const [loading, setLoading] = useState(true);
   const [backdropURL, setBackdropURL] = useState<string>("");
   const posterPath = "https://image.tmdb.org/t/p/w200";
@@ -51,6 +54,9 @@ const MoviesListing: FunctionComponent<{
     setMovieTitle(movieTitle);
   };
 
+  const openMovieDetails = (movie: any) => {
+    setMovieDetail(movie);
+  };
   return (
     <div
       className="movies-listing-container"
@@ -78,6 +84,7 @@ const MoviesListing: FunctionComponent<{
                     movie.backdrop_path
                   )
                 }
+                onClick={() => openMovieDetails(movie)}
               />
             </div>
             <div className="movie-title-container">
@@ -91,6 +98,20 @@ const MoviesListing: FunctionComponent<{
           onMoviesUpdate={onMoviesUpdate}
           onPageHideStatusUpdate={() => false}
         />
+      </div>
+      <div
+        className="movie-detail-container"
+        style={
+          movieDetail
+            ? { visibility: "visible", opacity: 1 }
+            : { visibility: "hidden", opacity: 0 }
+        }
+      >
+        <AiOutlineClose
+          onClick={() => setMovieDetail(false)}
+          className="close-button"
+        />
+        {movieDetail ? <MovieDetail movie={movieDetail} /> : <div />}
       </div>
     </div>
   );
