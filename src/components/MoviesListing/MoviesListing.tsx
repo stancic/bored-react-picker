@@ -16,8 +16,10 @@ const MoviesListing: FunctionComponent<{
   onMoviesUpdate: any;
 }> = ({ movies, year, genreID, onMoviesUpdate }) => {
   let [loadedMovies, setLoadedMovies] = useState<any>(movies);
+  let [movieTitle, setMovieTitle] = useState<string>("");
   let [pageNumber, setPageNumber] = useState<number>(1);
   const [loading, setLoading] = useState(true);
+  const [backdropURL, setBackdropURL] = useState<string>("");
   const posterPath = "https://image.tmdb.org/t/p/w200";
 
   const handleScroll = (event: any) => {
@@ -41,11 +43,27 @@ const MoviesListing: FunctionComponent<{
     loadMoreMovies();
   }, [genreID, pageNumber, year]);
 
-  console.log(loadedMovies);
+  const changeBackgroundAndMovieTitle = (
+    movieTitle: string,
+    backdrop: string
+  ) => {
+    setBackdropURL(backdrop);
+    setMovieTitle(movieTitle);
+  };
 
   return (
-    <div className="movies-listing-container">
-      <h1 className="movies-listing-title">Pick a movie.</h1>
+    <div
+      className="movies-listing-container"
+      style={{
+        backgroundImage: `url(https://image.tmdb.org/t/p/original/${backdropURL})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      <h1 className="movies-listing-title">
+        {movieTitle ? movieTitle : "Pick a movie."}
+      </h1>
       <div className="movies-listing" onScroll={handleScroll}>
         {loadedMovies.map((movie: any) => (
           <div className="movie" key={loadedMovies.indexOf(movie)}>
@@ -54,6 +72,12 @@ const MoviesListing: FunctionComponent<{
                 className="movie-image"
                 src={posterPath + movie.poster_path}
                 alt="movie poster"
+                onMouseOver={() =>
+                  changeBackgroundAndMovieTitle(
+                    movie.title,
+                    movie.backdrop_path
+                  )
+                }
               />
             </div>
             <div className="movie-title-container">
@@ -61,7 +85,6 @@ const MoviesListing: FunctionComponent<{
             </div>
           </div>
         ))}
-        {loading ? <div>Loading...</div> : <div>End...</div>}
       </div>
       <div className="new-movies-form-container">
         <InitializeMovieForm
