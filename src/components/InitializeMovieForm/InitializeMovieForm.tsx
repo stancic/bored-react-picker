@@ -56,8 +56,8 @@ const InitializeMovieForm: FunctionComponent<{
 
   const [pageHideStatus, setPageHideStatus] = useState<boolean>(false);
 
-  const [year, setYear] = useState<number>(1894);
-  const [yearHelper, setYearHelper] = useState<number>(1894);
+  const [year, setYear] = useState<number>(0);
+  const [yearHelper, setYearHelper] = useState<number>(0);
 
   const initilaizeGenres = async () => {
     const genres = await getGenres();
@@ -85,13 +85,15 @@ const InitializeMovieForm: FunctionComponent<{
       let selectedGenreID = genres.find(
         (genre) => genre.name === selectedGenre
       );
-      setGenreID(selectedGenreID?.id);
-    }
-    if (yearHelper < 1895 || yearHelper > 2021) {
-      alert("Year should be later than 1894 and sooner than 2022!");
-    } else {
-      setYear(yearHelper);
-      setPageHideStatus(true);
+      if (selectedGenreID) {
+        setGenreID(selectedGenreID.id);
+      }
+      if (yearHelper < 1895 || yearHelper > 2021) {
+        alert("Year should be later than 1894 and sooner than 2022!");
+      } else {
+        setYear(yearHelper);
+        setPageHideStatus(true);
+      }
     }
   };
 
@@ -118,7 +120,8 @@ const InitializeMovieForm: FunctionComponent<{
   // Share movies to MoviesListing component
   useEffect(() => {
     onMoviesUpdate(movies, year, genreID);
-  }, [onMoviesUpdate, movies, year, genreID]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [movies, year, genreID]);
 
   // Share page hide status
   useEffect(() => {
