@@ -21,6 +21,7 @@ const MoviesListing: FunctionComponent<{
   const [movieTitle, setMovieTitle] = useState<string>("");
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [movieDetail, setMovieDetail] = useState<any>(undefined);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [loading, setLoading] = useState(true);
   const [backdropURL, setBackdropURL] = useState<string>("");
   const posterPath = "https://image.tmdb.org/t/p/w200";
