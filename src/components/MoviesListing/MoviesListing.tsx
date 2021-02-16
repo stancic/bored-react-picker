@@ -44,8 +44,13 @@ const MoviesListing: FunctionComponent<{
       setLoadedMovies((prev: any) => [...prev, ...newMovies.results]);
       setLoading(false);
     };
+
     loadMoreMovies();
-  }, [genreID, pageNumber, year]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pageNumber]);
+
+  console.log("movies: ", loadedMovies);
 
   const changeBackgroundAndMovieTitle = (
     movieTitle: string,
