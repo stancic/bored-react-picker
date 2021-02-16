@@ -88,3 +88,22 @@
     }
   }
 }
+.movie-detail-container {
+  width: 100%;
+  height: 100vh;
+  backdrop-filter: blur(20px);
+  z-index: 50;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  transition: 1s all ease;
+  align-items: center;
+  .close-button {
+    color: white;
+    position: fixed;
+    top: 2em;
+    right: 2em;
+    font-size: 2em;
+    cursor: pointer;
+  }
+}
