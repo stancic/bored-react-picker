@@ -50,7 +50,7 @@ const InitializeMovieForm: FunctionComponent<{
   // Used states
   const [genres, setGenres] = useState<{ id: number; name: string }[]>([]);
   const [selectedGenre, setSelectedGenre] = useState("Action"); // Genre on button click
-  const [genreID, setGenreID] = useState<number | undefined>(28); // Genre id from selected genre
+  const [genreID, setGenreID] = useState<number | undefined>(0); // Genre id from selected genre
 
   const [movies, setMovies] = useState<any>([]); // Movies state shared between components
 
@@ -132,6 +132,7 @@ const InitializeMovieForm: FunctionComponent<{
         style={!titleShowState ? { opacity: 1 } : {}}
       >
         <h1>Let me recommend you something</h1>
+        <div className="background"></div>
         <div className="form">
           <select
             size={1}
