@@ -1,5 +1,4 @@
 {
-  "homepage": "https://stancic.github.io/bored-react-picker",
   "name": "bored-react-picker",
   "version": "0.1.0",
   "private": true,
@@ -26,11 +25,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "predeploy": "npm run build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
