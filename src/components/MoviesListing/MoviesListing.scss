@@ -1,24 +1,32 @@
 .movies-listing-container {
   width: 100%;
   height: 100vh;
-  background: #111822;
-  color: #cfcdd186;
+  background: black;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   -webkit-backdrop-filter: blur(10em);
   backdrop-filter: blur(10em);
+  .movies-listing-title {
+    color: white;
+    width: 100%;
+    font-size: 3em;
+    margin-left: 2em;
+  }
   .movies-listing {
     width: 80%;
-    height: 80vh;
+    height: 65vh;
     overflow-y: auto;
     overflow-x: hidden;
     display: grid;
     justify-items: center;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(4, 1fr);
     border-radius: 6px;
     z-index: 20;
+    @media (max-width: 1600px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
     .movie {
       margin: 1em;
       display: flex;
@@ -27,6 +35,7 @@
       justify-content: center;
       align-items: center;
       border-radius: 6px;
+      color: #cfcdd186;
       .movie-image {
         cursor: pointer;
         border-radius: 10px;
@@ -62,22 +71,11 @@
       .form {
         opacity: 1;
         overflow: hidden;
-        padding: 1em 8em;
+        padding: 1.2em 4em;
         z-index: 5;
-        border: none;
+        border: 1px solid rgba(255, 255, 255, 0.26);
+        border-bottom: none;
         border-radius: 5px 5px 0 0;
-        &:before {
-          content: "";
-          background: inherit;
-          position: absolute;
-          width: 100%;
-          padding: 2.5em;
-          border-radius: 20px 20px 0 0;
-          bottom: 0;
-          z-index: -10;
-          box-shadow: inset 0 0 2000px rgba(255, 255, 255, 0.473);
-          filter: blur(10px);
-        }
         .find-button {
           padding: 0.6rem 2rem 0.6rem 2rem;
           font-size: 1.2em;
