@@ -28,7 +28,7 @@ const MoviesListing: FunctionComponent<{
 
   const handleScroll = (event: any) => {
     const { scrollTop, clientHeight, scrollHeight } = event.currentTarget;
-    if (scrollHeight - scrollTop === clientHeight) {
+    if (Math.round(scrollHeight) - Math.round(scrollTop) === clientHeight) {
       setPageNumber((prev) => prev + 1);
     }
   };
