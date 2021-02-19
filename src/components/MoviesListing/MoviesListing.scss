@@ -20,7 +20,6 @@
     display: grid;
     justify-items: center;
     grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(4, 1fr);
     border-radius: 6px;
     z-index: 20;
     backdrop-filter: blur(15px);
@@ -28,6 +27,12 @@
     padding: 2em;
     @media (max-width: 1600px) {
       grid-template-columns: repeat(4, 1fr);
+    }
+    @media (max-width: 920px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: 620px) {
+      grid-template-columns: repeat(1, 1fr);
     }
     .movie {
       margin: 1em;
@@ -95,14 +100,16 @@
   position: absolute;
   display: flex;
   justify-content: center;
-  transition: 1s all ease;
+  transition: 0.3s all ease;
   align-items: center;
-  .close-button {
-    color: white;
-    position: fixed;
-    top: 2em;
-    right: 2em;
-    font-size: 2em;
-    cursor: pointer;
-  }
+}
+
+.close-button {
+  color: white;
+  position: fixed;
+  top: 2em;
+  right: 2em;
+  font-size: 2em;
+  z-index: 100;
+  cursor: pointer;
 }
