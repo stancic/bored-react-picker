@@ -28,8 +28,9 @@
     justify-content: center;
     align-items: center;
     font-family: "Roboto", sans-serif;
-    .year-input::placeholder {
-      color: white;
+    @media (max-width: 930px) {
+      flex-direction: column;
+      padding: 2rem 5rem;
     }
     .category-select {
       position: relative;
@@ -37,10 +38,23 @@
       option {
         background: black;
       }
+      @media (max-width: 930px) {
+        width: 300px;
+        margin-bottom: 30px;
+      }
     }
+    .year-input {
+      &::placeholder {
+        color: white;
+      }
+      @media (max-width: 930px) {
+        width: 300px;
+        margin-bottom: 30px;
+      }
+    }
+
     .find-button {
       padding: 0.7rem 4rem 0.7rem 4rem;
-      margin-right: 2rem;
       background: transparent linear-gradient(103deg, #c53cd4 0%, #4626b3 100%)
         0% 0% no-repeat padding-box;
       border-radius: 8px;
