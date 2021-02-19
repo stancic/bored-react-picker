@@ -10,7 +10,6 @@ import "./MovieDetail.scss";
 // Services
 import { getMovieDetail } from "../../services/moviesServices";
 import { getTrailer } from "../../services/moviesServices";
-import { Z_ASCII } from "zlib";
 
 interface Props {
   movie: any;
