@@ -27,13 +27,16 @@ const MovieDetail: FunctionComponent<Props> = (movie) => {
   useEffect(() => {
     const getIMDBID = async () => {
       const detail = await getMovieDetail(movieDetail.id);
-      console.log(detail);
       setImdbID(detail.imdb_id);
     };
     const getMovieTrailer = async () => {
       const detail = await getTrailer(movieDetail.id);
       console.log(detail);
-      setTrailerID(detail.results[0].key);
+      if (detail.results.length === 0) {
+        setTrailerID(undefined);
+      } else {
+        setTrailerID(detail.results[0].key);
+      }
     };
     getMovieTrailer();
     getIMDBID();
@@ -90,7 +93,15 @@ const MovieDetail: FunctionComponent<Props> = (movie) => {
                 >
                   <SiImdb />
                 </a>
-                <SiYoutube className="movie-link" onClick={openTrailer} />
+                <SiYoutube
+                  className="movie-link"
+                  onClick={openTrailer}
+                  style={
+                    trailerID === undefined
+                      ? { display: "none" }
+                      : { display: "block" }
+                  }
+                />
                 <div
                   className="trailer-container"
                   style={
