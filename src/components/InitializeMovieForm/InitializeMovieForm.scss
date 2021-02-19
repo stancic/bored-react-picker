@@ -12,6 +12,14 @@
     font-size: 1em;
     letter-spacing: 4px;
     text-align: center;
+    @media (max-width: 930px) {
+      width: 600px;
+      font-size: 0.6em;
+    }
+    @media (max-width: 600px) {
+      width: 320px;
+      font-size: 0.65em;
+    }
   }
   .form {
     border: 2px solid rgba(255, 255, 255, 0.151);
