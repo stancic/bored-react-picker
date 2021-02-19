@@ -2,6 +2,7 @@ import React, { FunctionComponent, useEffect, useState } from "react";
 
 // Components
 import { SiImdb, SiYoutube } from "react-icons/si";
+import { AiOutlineClose } from "react-icons/ai";
 
 // Styles
 import "./MovieDetail.scss";
@@ -9,6 +10,7 @@ import "./MovieDetail.scss";
 // Services
 import { getMovieDetail } from "../../services/moviesServices";
 import { getTrailer } from "../../services/moviesServices";
+import { Z_ASCII } from "zlib";
 
 interface Props {
   movie: any;
@@ -18,9 +20,10 @@ const MovieDetail: FunctionComponent<Props> = (movie) => {
   const movieDetail = movie.movie;
   const posterPath = "https://image.tmdb.org/t/p/w200";
   const imdbPath = "https://www.imdb.com/title/";
-  const youTubePath = "https://www.youtube.com/watch?v=";
+  const youTubePath = "https://www.youtube.com/embed/";
   const [imdbID, setImdbID] = useState(0);
   const [trailerID, setTrailerID] = useState<any>(undefined);
+  const [openTrailerFlag, setOpenTrailerFlag] = useState<boolean>(true);
 
   useEffect(() => {
     const getIMDBID = async () => {
@@ -36,8 +39,23 @@ const MovieDetail: FunctionComponent<Props> = (movie) => {
     getMovieTrailer();
     getIMDBID();
   }, [movieDetail]);
+
+  const openTrailer = () => {
+    setOpenTrailerFlag((prev: boolean) => !prev);
+  };
+
+  console.log(openTrailerFlag);
   return (
     <div>
+      <AiOutlineClose
+        className="close-button"
+        onClick={openTrailer}
+        style={
+          openTrailerFlag
+            ? { display: "none" }
+            : { display: "flex", zIndex: 101 }
+        }
+      />
       <div className="open-movie-container">
         <h1 className="open-movie-title">{movieDetail.title}</h1>
         <div className="open-movie-left-side-container">
@@ -73,14 +91,27 @@ const MovieDetail: FunctionComponent<Props> = (movie) => {
                 >
                   <SiImdb />
                 </a>
-                <a
-                  href={youTubePath + trailerID}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="movie-link"
+                <SiYoutube className="movie-link" onClick={openTrailer} />
+                <div
+                  className="trailer-container"
+                  style={
+                    openTrailerFlag ? { display: "none" } : { display: "flex" }
+                  }
                 >
-                  <SiYoutube />
-                </a>
+                  <iframe
+                    title={youTubePath + trailerID}
+                    src={youTubePath + trailerID}
+                    width="auto"
+                    height="auto"
+                    className="embeded-video"
+                    frameBorder="0"
+                    style={
+                      openTrailerFlag
+                        ? { display: "none" }
+                        : { display: "block" }
+                    }
+                  ></iframe>
+                </div>
               </div>
             </div>
           </div>
