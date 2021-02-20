@@ -24,6 +24,7 @@ const MoviesListing: FunctionComponent<{
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [loading, setLoading] = useState(true);
   const [backdropURL, setBackdropURL] = useState<string>("");
+  const [allBackdrops, setAllBackdrops] = useState<any>([]);
   const posterPath = "https://image.tmdb.org/t/p/w200";
 
   const handleScroll = (event: any) => {
@@ -35,6 +36,12 @@ const MoviesListing: FunctionComponent<{
 
   useEffect(() => {
     setLoadedMovies(movies);
+    movies.map((movie: any) =>
+      setAllBackdrops((prev: any) => [
+        ...prev,
+        "https://image.tmdb.org/t/p/original/" + movie.backdrop_path,
+      ])
+    );
   }, [movies]);
 
   useEffect(() => {
@@ -42,6 +49,12 @@ const MoviesListing: FunctionComponent<{
       setLoading(true);
       const newMovies = await getMovies(pageNumber, year, genreID);
       setLoadedMovies((prev: any) => [...prev, ...newMovies.results]);
+      newMovies.results.map((movie: any) =>
+        setAllBackdrops((prev: any) => [
+          ...prev,
+          "https://image.tmdb.org/t/p/original/" + movie.backdrop_path,
+        ])
+      );
       setLoading(false);
     };
 
@@ -50,7 +63,20 @@ const MoviesListing: FunctionComponent<{
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageNumber]);
 
-  console.log("movies: ", loadedMovies);
+  useEffect(() => {
+    const loadImage = (image_url: any) => {
+      return new Promise((resolve, reject) => {
+        const loadImg = new Image();
+        loadImg.src = image_url;
+        loadImg.onload = () => resolve(image_url);
+        loadImg.onerror = (err) => reject(err);
+      });
+    };
+
+    Promise.all(
+      allBackdrops.map((image: any) => loadImage(image))
+    ).catch((err) => console.log("Failed to load images", err));
+  }, [allBackdrops]);
 
   const changeBackgroundAndMovieTitle = (
     movieTitle: string,
@@ -84,7 +110,7 @@ const MoviesListing: FunctionComponent<{
                 className="movie-image"
                 src={posterPath + movie.poster_path}
                 alt="movie poster"
-                onMouseOver={() =>
+                onMouseEnter={() =>
                   changeBackgroundAndMovieTitle(
                     movie.title,
                     movie.backdrop_path
