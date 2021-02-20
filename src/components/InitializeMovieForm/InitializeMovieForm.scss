@@ -32,6 +32,9 @@
       flex-direction: column;
       padding: 2rem 5rem;
     }
+    @media (max-height: 700px) {
+      flex-direction: row;
+    }
     .category-select {
       position: relative;
       cursor: pointer;
@@ -42,6 +45,10 @@
         width: 300px;
         margin-bottom: 30px;
       }
+      @media (max-height: 700px) {
+        width: 150px;
+        margin-bottom: 0;
+      }
     }
     .year-input {
       &::placeholder {
@@ -50,6 +57,10 @@
       @media (max-width: 930px) {
         width: 300px;
         margin-bottom: 30px;
+      }
+      @media (max-height: 700px) {
+        width: 150px;
+        margin-bottom: 0;
       }
     }
 
@@ -74,6 +85,9 @@
         border: 1.3px solid white;
         opacity: 0.7;
         color: white;
+      }
+      @media (max-height: 700px) {
+        padding: 0.5rem 2rem;
       }
     }
   }

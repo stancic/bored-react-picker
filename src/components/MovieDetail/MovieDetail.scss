@@ -1,8 +1,10 @@
 .movie-link {
   color: white;
-  margin-right: 1.1em;
   font-size: 2em;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .open-movie-container {
@@ -14,53 +16,79 @@
   position: relative;
   color: white;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   transition: 1s all ease;
   z-index: 20;
-  .open-movie-title {
-    position: absolute;
-    top: 1em;
-    left: 1em;
+  @media (max-width: 920px) {
+    flex-direction: column;
+    overflow-y: scroll;
   }
-  .open-movie-left-side-container {
+  .open-movie-title-container {
+    flex: 0.5;
     display: flex;
-    justify-content: center;
     align-items: center;
-    margin: 0 3em;
-    font-size: 1.2em;
-    .open-movie-image {
-      border: 2px solid white;
-      border-radius: 10px;
+    .open-movie-title {
+      margin-left: 1em;
+      margin-top: 1em;
     }
   }
-  .open-movie-right-side-container {
-    margin-right: 3em;
-    font-size: 1.3em;
+  .open-movie-data-container {
+    flex: 4;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    .open-movie-imdbyt-container {
+    flex-direction: row;
+    @media (max-width: 920px) {
+      flex-direction: column;
+    }
+    .open-movie-left-side-container {
       display: flex;
-      height: 3em;
-      align-items: flex-end;
-      font-size: 2em;
-      .trailer-container {
-        top: 0;
-        left: 0;
+      justify-content: center;
+      align-items: center;
+      margin: 0 3em;
+      font-size: 1.2em;
+      .open-movie-image {
+        border: 2px solid white;
+        border-radius: 10px;
+      }
+    }
+    .open-movie-right-side-container {
+      margin-right: 3em;
+      font-size: 1.3em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @media (max-width: 920px) {
+        margin-left: 3em;
+      }
+      .open-movie-imdbyt-container {
         display: flex;
-        width: 100vw;
-        height: 100vh;
-        position: fixed;
-        justify-content: center;
+        flex-direction: row;
+        height: 3em;
+        font-size: 1.4em;
         align-items: center;
-        z-index: 10;
-        .embeded-video {
+        @media (max-width: 920px) {
+          justify-content: center;
+        }
+        .imdb-container {
+          margin-right: 2em;
+        }
+        .trailer-container {
+          top: 0;
+          left: 0;
+          display: flex;
+          width: 100vw;
+          height: 100vh;
+          position: fixed;
+          justify-content: center;
+          align-items: center;
           z-index: 10;
-          width: 80%;
-          height: 80vh;
-          border: 0.16em white solid;
-          border-radius: 10px;
-          transition: 0.6s all ease;
+          .embeded-video {
+            z-index: 10;
+            width: 80%;
+            height: 80vh;
+            border: 0.16em white solid;
+            border-radius: 10px;
+            transition: 0.6s all ease;
+          }
         }
       }
     }

@@ -28,10 +28,10 @@
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     padding: 2em;
-    @media (max-width: 1600px) {
+    @media (max-width: 1800px) {
       grid-template-columns: repeat(4, 1fr);
     }
-    @media (max-width: 1000px) {
+    @media (max-width: 1230px) {
       grid-template-columns: repeat(3, 1fr);
       margin-top: 2em;
     }
@@ -121,6 +121,10 @@
   font-size: 2em;
   z-index: 100;
   cursor: pointer;
+  @media (max-width: 920px) {
+    top: 5px;
+    right: 5px;
+  }
 }
 .choose-new-movie {
   flex-direction: column;
