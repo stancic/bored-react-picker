@@ -42,6 +42,10 @@
       grid-template-columns: repeat(1, 1fr);
       padding: 1em 2em;
     }
+    @media (max-width: 568px) {
+      margin-top: 0;
+      padding: 0;
+    }
     .movie {
       margin: 1em;
       display: flex;
