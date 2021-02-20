@@ -16,7 +16,8 @@ const MoviesListing: FunctionComponent<{
   year: number | undefined;
   genreID: number | undefined;
   onMoviesUpdate: any;
-}> = ({ movies, year, genreID, onMoviesUpdate }) => {
+  guestSessionID: string;
+}> = ({ movies, year, genreID, onMoviesUpdate, guestSessionID }) => {
   const [loadedMovies, setLoadedMovies] = useState<any>(movies);
   const [movieTitle, setMovieTitle] = useState<string>("");
   const [pageNumber, setPageNumber] = useState<number>(1);
@@ -89,6 +90,7 @@ const MoviesListing: FunctionComponent<{
   const openMovieDetails = (movie: any) => {
     setMovieDetail(movie);
   };
+
   return (
     <div
       className="movies-listing-container"
@@ -143,7 +145,11 @@ const MoviesListing: FunctionComponent<{
           onClick={() => setMovieDetail(false)}
           className="close-button"
         />
-        {movieDetail ? <MovieDetail movie={movieDetail} /> : <div />}
+        {movieDetail ? (
+          <MovieDetail movie={movieDetail} guestSessionID={guestSessionID} />
+        ) : (
+          <div />
+        )}
       </div>
     </div>
   );
