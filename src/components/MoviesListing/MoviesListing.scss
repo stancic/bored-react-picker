@@ -11,6 +11,9 @@
     width: 100%;
     font-size: 3em;
     margin-left: 2em;
+    @media (max-width: 1000px) {
+      display: none;
+    }
   }
   .movies-listing {
     width: 80%;
@@ -28,11 +31,16 @@
     @media (max-width: 1600px) {
       grid-template-columns: repeat(4, 1fr);
     }
+    @media (max-width: 1000px) {
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 2em;
+    }
     @media (max-width: 920px) {
       grid-template-columns: repeat(2, 1fr);
     }
     @media (max-width: 620px) {
       grid-template-columns: repeat(1, 1fr);
+      padding: 1em 2em;
     }
     .movie {
       margin: 1em;
@@ -64,6 +72,7 @@
     display: flex;
     justify-content: center;
     position: fixed;
+    transition: 0.5s ease all;
     .form-container {
       display: flex;
       bottom: 0;
@@ -112,4 +121,25 @@
   font-size: 2em;
   z-index: 100;
   cursor: pointer;
+}
+.choose-new-movie {
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  position: fixed;
+  bottom: 0;
+  span {
+    text-align: center;
+    font-size: 22px;
+    padding: 10px;
+    border: 2px solid white;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    color: white;
+    text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000,
+      1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+  }
+  @media (max-width: 930px) {
+    display: flex;
+  }
 }
