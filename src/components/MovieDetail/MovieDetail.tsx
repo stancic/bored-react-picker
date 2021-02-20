@@ -3,26 +3,32 @@ import React, { FunctionComponent, useEffect, useState } from "react";
 // Components
 import { SiImdb, SiYoutube } from "react-icons/si";
 import { AiOutlineClose } from "react-icons/ai";
+import StarRatingComponent from "react-star-rating-component";
 
 // Styles
 import "./MovieDetail.scss";
 
 // Services
-import { getMovieDetail } from "../../services/moviesServices";
-import { getTrailer } from "../../services/moviesServices";
+import {
+  getMovieDetail,
+  getTrailer,
+  rateMovie,
+} from "../../services/moviesServices";
 
-interface Props {
+const MovieDetail: FunctionComponent<{
   movie: any;
-}
-
-const MovieDetail: FunctionComponent<Props> = (movie) => {
-  const movieDetail = movie.movie;
+  guestSessionID: string;
+}> = ({ movie, guestSessionID }) => {
+  const movieDetail = movie;
   const posterPath = "https://image.tmdb.org/t/p/w200";
   const imdbPath = "https://www.imdb.com/title/";
   const youTubePath = "https://www.youtube.com/embed/";
   const [imdbID, setImdbID] = useState(0);
   const [trailerID, setTrailerID] = useState<any>(undefined);
   const [openTrailerFlag, setOpenTrailerFlag] = useState<boolean>(true);
+  const [movieRatingHelper, setMovieRatingHelper] = useState<number>(0);
+  const [rateFlag, setRateFlag] = useState<boolean>(false);
+  const [ratedMovieID, setRatedMovieID] = useState<any>(undefined);
 
   useEffect(() => {
     const getIMDBID = async () => {
@@ -31,7 +37,6 @@ const MovieDetail: FunctionComponent<Props> = (movie) => {
     };
     const getMovieTrailer = async () => {
       const detail = await getTrailer(movieDetail.id);
-      console.log(detail);
       if (detail.results.length === 0) {
         setTrailerID(undefined);
       } else {
@@ -46,7 +51,19 @@ const MovieDetail: FunctionComponent<Props> = (movie) => {
     setOpenTrailerFlag((prev: boolean) => !prev);
   };
 
-  console.log(openTrailerFlag);
+  const changeRatingWhileHover = (newRating: number) => {
+    setMovieRatingHelper(newRating);
+  };
+  const changeRating = () => {
+    if (rateFlag && ratedMovieID === movieDetail.id) {
+      alert("You've already rated this movie");
+    } else {
+      rateMovie(movieDetail.id, movieRatingHelper, guestSessionID);
+      setRateFlag(true);
+      setRatedMovieID(movieDetail.id);
+      alert("Thanks for rating this movie");
+    }
+  };
   return (
     <div>
       <AiOutlineClose
@@ -81,6 +98,18 @@ const MovieDetail: FunctionComponent<Props> = (movie) => {
             </div>
           </div>
           <div className="open-movie-right-side-container">
+            <div className="open-movie-rating-container">
+              <p>Rate this movie:</p>
+              <StarRatingComponent
+                name="movieRating"
+                starCount={10}
+                starColor="yellow"
+                emptyStarColor="white"
+                value={movieRatingHelper}
+                onStarHover={changeRatingWhileHover}
+                onStarClick={changeRating}
+              />
+            </div>
             <div className="open-movie-overview-and-imdbyt-container">
               <div className="open-movie-overview-container">
                 <p className="movie-overview">{movieDetail.overview}</p>
