@@ -1,13 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // Components
 import ChooseCategory from "./components/ChooseCategory/ChooseCategory";
 import MoviesListing from "./components/MoviesListing/MoviesListing";
 
+// Services
+import { getGuestToken } from "./services/moviesServices";
+
 const App = () => {
   const [movies, setMovies] = useState<any>([]);
   const [year, setYear] = useState<number | undefined>(0);
   const [genreID, setGenreID] = useState<number | undefined>(0);
+  const [guestSessionID, setGuestSessionID] = useState<string>("");
+
+  const getGuestSessionID = async () => {
+    const sessionID = await getGuestToken();
+    setGuestSessionID(sessionID.guest_session_id);
+  };
+
+  useEffect(() => {
+    getGuestSessionID();
+  }, []);
 
   const updateMovies = (
     movie: [],
@@ -30,6 +43,7 @@ const App = () => {
           year={year}
           genreID={genreID}
           onMoviesUpdate={updateMovies}
+          guestSessionID={guestSessionID}
         />
       </div>
     </div>
