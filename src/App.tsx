@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 // Components
 import ChooseCategory from "./components/ChooseCategory/ChooseCategory";
 import MoviesListing from "./components/MoviesListing/MoviesListing";
+import Menu from "./components/Menu/Menu";
 
 // Services
 import { getGuestToken } from "./services/moviesServices";
@@ -33,6 +34,7 @@ const App = () => {
   };
   return (
     <div className="App">
+      <Menu />
       <div className="loading-and-category-container">
         <ChooseCategory onMoviesUpdate={updateMovies} />
       </div>
