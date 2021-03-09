@@ -1,0 +1,12 @@
+.login-form-container {
+  margin-left: 8em;
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    font-size: 2em;
+    .input {
+      padding-bottom: 2em;
+      width: 20em;
+    }
+  }
+}
