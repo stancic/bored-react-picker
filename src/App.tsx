@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import ChooseCategory from "./components/ChooseCategory/ChooseCategory";
 import MoviesListing from "./components/MoviesListing/MoviesListing";
 import Menu from "./components/Menu/Menu";
+import { BrowserRouter as Router } from "react-router-dom";
 
 // Services
 import { getGuestToken } from "./services/moviesServices";
@@ -33,22 +34,24 @@ const App = () => {
     setGenreID(genreID);
   };
   return (
-    <div className="App">
-      <Menu />
-      <div className="loading-and-category-container">
-        <ChooseCategory onMoviesUpdate={updateMovies} />
-      </div>
+    <Router>
+      <div className="App">
+        <Menu />
+        <div className="loading-and-category-container">
+          <ChooseCategory onMoviesUpdate={updateMovies} />
+        </div>
 
-      <div className="movies-container">
-        <MoviesListing
-          movies={movies}
-          year={year}
-          genreID={genreID}
-          onMoviesUpdate={updateMovies}
-          guestSessionID={guestSessionID}
-        />
+        <div className="movies-container">
+          <MoviesListing
+            movies={movies}
+            year={year}
+            genreID={genreID}
+            onMoviesUpdate={updateMovies}
+            guestSessionID={guestSessionID}
+          />
+        </div>
       </div>
-    </div>
+    </Router>
   );
 };
 
