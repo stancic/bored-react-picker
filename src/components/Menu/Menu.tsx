@@ -3,18 +3,15 @@ import React, { FunctionComponent, useEffect, useState } from "react";
 // Components
 import { Turn as Hamburger } from "hamburger-react";
 import MenuData from "./MenuData/MenuData";
-
-// Context
-import { LoginFormContext, SignupFormContext } from "../Context/Context";
+import LoginForm from "./Login/LoginForm";
+import SignupForm from "./Signup/SignupForm";
 
 // Styles
 import "./Menu.scss";
-import LoginForm from "./Login/LoginForm";
 
 const Menu: FunctionComponent = () => {
   const [menuIconState, setMenuIconState] = useState<boolean>(false);
   const [showMenuIcon, setShowMenuIcon] = useState<boolean>(true);
-  const [showLoginForm, setShowLoginForm] = useState<boolean>(false);
 
   useEffect(() => {
     setTimeout(() => {
@@ -25,9 +22,6 @@ const Menu: FunctionComponent = () => {
     };
   }, []);
 
-  const changeLoginFormState = (state: boolean) => {
-    setShowLoginForm(state);
-  };
   return (
     <div>
       <div
@@ -49,10 +43,9 @@ const Menu: FunctionComponent = () => {
             : { marginLeft: "3000px", zIndex: 7 }
         }
       >
-        <LoginFormContext.Provider value={showLoginForm}>
-          <LoginForm />
-        </LoginFormContext.Provider>
-        <MenuData changeLoginFormState={changeLoginFormState} />
+        <LoginForm />
+        <SignupForm />
+        <MenuData />
       </div>
     </div>
   );
