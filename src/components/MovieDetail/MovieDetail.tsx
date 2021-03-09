@@ -13,7 +13,7 @@ import {
   getMovieDetail,
   getTrailer,
   rateMovie,
-} from "../../services/moviesServices";
+} from "../../services/MoviesServices";
 
 const MovieDetail: FunctionComponent<{
   movie: any;

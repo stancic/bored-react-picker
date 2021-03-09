@@ -7,7 +7,7 @@ import Menu from "./components/Menu/Menu";
 import { BrowserRouter as Router } from "react-router-dom";
 
 // Services
-import { getGuestToken } from "./services/moviesServices";
+import { getGuestToken } from "./services/MoviesServices";
 
 const App = () => {
   const [movies, setMovies] = useState<any>([]);

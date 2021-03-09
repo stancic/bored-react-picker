@@ -7,8 +7,8 @@ import React, {
 } from "react";
 
 // Services
-import { getGenres } from "../../services/genresServices";
-import { getMovies } from "../../services/moviesServices";
+import { getGenres } from "../../services/GenresServices";
+import { getMovies } from "../../services/MoviesServices";
 import { TitleStateContext } from "../Context/Context";
 
 // Styles

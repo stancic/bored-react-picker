@@ -6,7 +6,7 @@ import MovieDetail from "../MovieDetail/MovieDetail";
 import { AiOutlineClose } from "react-icons/ai";
 
 // Services
-import { getMovies } from "../../services/moviesServices";
+import { getMovies } from "../../services/MoviesServices";
 
 // Styles
 import "./MoviesListing.scss";
