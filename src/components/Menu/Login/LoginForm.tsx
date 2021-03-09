@@ -11,13 +11,13 @@ import "./LoginForm.scss";
 const LoginForm: FunctionComponent = () => {
   return (
     <div className="menu-container">
-      <div className="login-form-container">
-        <form className="login-form">
+      <div className="login-form-container user-form-container">
+        <form className="login-form user-form">
           <TextField
             required
             id="standard-basic"
             label="Username/Email"
-            className="usernameEmail input"
+            className="username-email input"
           />
           <TextField
             required
