@@ -5,7 +5,7 @@ import { Turn as Hamburger } from "hamburger-react";
 import MenuData from "./MenuData/MenuData";
 import LoginForm from "./Login/LoginForm";
 import SignupForm from "./Signup/SignupForm";
-import { Route } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 
 // Styles
 import "./Menu.scss";
@@ -29,12 +29,14 @@ const Menu: FunctionComponent = () => {
         className="open-close-icon-container"
         style={showMenuIcon ? { opacity: 0 } : { opacity: 1 }}
       >
-        <Hamburger
-          toggled={menuIconState}
-          toggle={setMenuIconState}
-          color={menuIconState ? "black" : "white"}
-          size={32}
-        />
+        <Link to="/" className="link">
+          <Hamburger
+            toggled={menuIconState}
+            toggle={setMenuIconState}
+            color={menuIconState ? "black" : "white"}
+            size={32}
+          />
+        </Link>
       </div>
       <div
         className="menu-container"
