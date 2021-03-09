@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 
 // Components
 import MenuData from "../MenuData/MenuData";
@@ -9,9 +9,23 @@ import Button from "@material-ui/core/Button";
 import "./LoginForm.scss";
 
 const LoginForm: FunctionComponent = () => {
+  const [showLoginForm, setShowLoginForm] = useState<boolean>(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShowLoginForm(false);
+    }, 100);
+    return () => {
+      setShowLoginForm(true);
+    };
+  }, []);
+
   return (
     <div className="menu-container">
-      <div className="login-form-container user-form-container">
+      <div
+        className="login-form-container user-form-container"
+        style={showLoginForm ? { opacity: 0 } : { opacity: 1 }}
+      >
         <form className="login-form user-form">
           <TextField
             required
