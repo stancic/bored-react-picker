@@ -33,7 +33,7 @@ const Menu: FunctionComponent = () => {
           toggled={menuIconState}
           toggle={setMenuIconState}
           color={menuIconState ? "black" : "white"}
-          size={40}
+          size={32}
         />
       </div>
       <div
