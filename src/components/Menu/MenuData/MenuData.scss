@@ -43,4 +43,10 @@
   .menu-title {
     font-size: 4em;
   }
+  @media (max-width: 1200px) {
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+  }
 }
