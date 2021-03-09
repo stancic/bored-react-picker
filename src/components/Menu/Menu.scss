@@ -1,0 +1,62 @@
+.open-close-icon-container {
+  color: white;
+  cursor: pointer;
+  position: fixed;
+  z-index: 1000;
+  top: 5%;
+  right: 5%;
+  padding: 0;
+  margin: 0;
+  transition: 0.6s opacity ease;
+}
+
+.menu-container {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background-color: white;
+  padding: 0;
+  margin-left: 3000px;
+  transition: 0.6s all ease;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  .menu-data-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-right: 15%;
+    .login-open,
+    .signup-open,
+    .menu-title {
+      cursor: pointer;
+      display: inline;
+      position: relative;
+      &::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        bottom: -10px;
+        left: 0;
+        background-color: black;
+        visibility: hidden;
+        transform: scaleX(0);
+        transition: all 0.3s ease-in-out 0s;
+      }
+      &:hover {
+        &::before {
+          visibility: visible;
+          transform: scaleX(1);
+        }
+      }
+    }
+    .login-open,
+    .signup-open {
+      font-size: 2em;
+    }
+    .menu-title {
+      font-size: 4em;
+    }
+  }
+}
