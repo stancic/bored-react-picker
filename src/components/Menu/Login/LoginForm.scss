@@ -1,9 +1,11 @@
 .login-form-container,
 .user-form-container {
   margin-left: 10em;
+  opacity: 0;
   border: 1px solid rgb(216, 216, 216);
   border-radius: 10px;
   padding: 2em;
+  transition: 0.6s all ease-in-out;
   .login-form,
   .user-form {
     display: flex;
