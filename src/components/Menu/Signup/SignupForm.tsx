@@ -25,7 +25,7 @@ const SignupForm: FunctionComponent = () => {
         className="signup-form-container user-form-container"
         style={showSignupForm ? { opacity: 0 } : { opacity: 1 }}
       >
-        <form className="signup-form user-form">
+        <form method="POST" className="signup-form user-form">
           <TextField
             required
             id="standard-basic"
@@ -45,8 +45,13 @@ const SignupForm: FunctionComponent = () => {
             type="password"
             className="password input"
           />
-          <Button variant="contained" color="default">
-            Login
+          <Button
+            variant="contained"
+            color="default"
+            className="user-form-submit"
+            type="submit"
+          >
+            Sign up
           </Button>
         </form>
       </div>

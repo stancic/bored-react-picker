@@ -53,7 +53,7 @@ const LoginForm: FunctionComponent = () => {
         className="login-form-container user-form-container"
         style={showLoginForm ? { opacity: 0 } : { opacity: 1 }}
       >
-        <form className="login-form user-form">
+        <form method="POST" className="login-form user-form">
           <TextField
             required
             id="standard-basic"
@@ -80,6 +80,7 @@ const LoginForm: FunctionComponent = () => {
             color="default"
             onClick={handleLogin}
             className="user-form-submit"
+            type="submit"
           >
             Login
           </Button>
