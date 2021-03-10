@@ -40,13 +40,12 @@ const LoginForm: FunctionComponent = () => {
   };
 
   useEffect(() => {
-    if (user && user.user) {
+    if (user) {
       redirect.push("/");
     } else if (user === 401) {
       alert("Wrong credentials");
     }
   }, [user, redirect]);
-
   return (
     <div className="menu-container">
       <div
