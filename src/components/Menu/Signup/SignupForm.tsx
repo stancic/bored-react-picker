@@ -38,16 +38,22 @@ const SignupForm: FunctionComponent = () => {
       password: password,
     };
     dispatch(userSignup(user));
-    setUsername("");
-    setEmail("");
-    setPassword("");
+    if (signedUser !== 409) {
+      setUsername("");
+      setEmail("");
+      setPassword("");
+    }
   };
 
   useEffect(() => {
-    if (signedUser) {
+    console.log(signedUser);
+  }, [signedUser]);
+
+  useEffect(() => {
+    if (signedUser !== 400 && signedUser !== 409) {
       alert("Thanks for signing up");
       redirect.push("/");
-    } else if (signedUser === 409) {
+    } else if (signedUser === 409 || signedUser === 400) {
       alert("Ooops try again");
     }
   }, [signedUser, redirect]);
