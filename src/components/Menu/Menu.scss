@@ -28,6 +28,7 @@
   @media (max-width: 1200px) {
     margin-left: 0;
     flex-direction: column-reverse;
+    justify-content: center;
     overflow-x: hidden;
     overflow-y: scroll;
   }
