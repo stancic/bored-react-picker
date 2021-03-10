@@ -75,7 +75,12 @@ const LoginForm: FunctionComponent = () => {
               setPassword(target.value);
             }}
           />
-          <Button variant="contained" color="default" onClick={handleLogin}>
+          <Button
+            variant="contained"
+            color="default"
+            onClick={handleLogin}
+            className="user-form-submit"
+          >
             Login
           </Button>
         </form>
