@@ -4,11 +4,7 @@ import { login } from "../services/UserServices";
 const loginReducer = (state = null, action: any) => {
   switch (action.type) {
     case "LOGIN":
-      if (action.data.user.user === undefined) {
-        return null;
-      } else {
-        return action.data.user.user;
-      }
+      return action.data.user;
     case "LOGOUT":
       return action.data;
     default:
