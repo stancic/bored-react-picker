@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 // Components
 import { Link } from "react-router-dom";
 
