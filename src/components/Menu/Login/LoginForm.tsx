@@ -1,14 +1,22 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 // Components
 import MenuData from "../MenuData/MenuData";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
+// Reducers
+import { logUser } from "../../../reducers/LoginReducer";
+
 // Styles
 import "./LoginForm.scss";
 
 const LoginForm: FunctionComponent = () => {
+  const dispatch = useDispatch();
+  const user = useSelector((store: any) => store.user);
+  const [usernameOrEmail, setUsernameOrEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showLoginForm, setShowLoginForm] = useState<boolean>(true);
 
   useEffect(() => {
@@ -19,6 +27,13 @@ const LoginForm: FunctionComponent = () => {
       setShowLoginForm(true);
     };
   }, []);
+
+  const handleLogin = async (event: any) => {
+    event.preventDefault();
+    dispatch(logUser({ usernameOrEmail, password }));
+    setUsernameOrEmail("");
+    setPassword("");
+  };
 
   return (
     <div className="menu-container">
@@ -32,6 +47,10 @@ const LoginForm: FunctionComponent = () => {
             id="standard-basic"
             label="Username/Email"
             className="username-email input"
+            value={usernameOrEmail}
+            onChange={({ target }) => {
+              setUsernameOrEmail(target.value);
+            }}
           />
           <TextField
             required
@@ -39,8 +58,12 @@ const LoginForm: FunctionComponent = () => {
             label="Password"
             type="password"
             className="password input"
+            value={password}
+            onChange={({ target }) => {
+              setPassword(target.value);
+            }}
           />
-          <Button variant="contained" color="default">
+          <Button variant="contained" color="default" onClick={handleLogin}>
             Login
           </Button>
         </form>
