@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { login } from "../services/LoginServices";
+import { login } from "../services/UserServices";
 
 const loginReducer = (state = null, action: any) => {
   switch (action.type) {
