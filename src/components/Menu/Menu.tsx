@@ -59,24 +59,30 @@ const Menu: FunctionComponent = () => {
         }
       >
         {user !== null && user !== 401 ? (
-          <div
-            className="logout-button-container"
-            onClick={handleLogout}
-            style={
-              menuIconState
-                ? { marginLeft: "0", zIndex: 7 }
-                : { marginLeft: "3000px", zIndex: 7 }
-            }
-          >
-            <BiLogOutCircle />
-            <span>logout</span>
+          <div className="menu-container">
+            <div
+              className="logout-button-container "
+              onClick={handleLogout}
+              style={
+                menuIconState
+                  ? { marginLeft: "0", zIndex: 7 }
+                  : { marginLeft: "3000px", zIndex: 7 }
+              }
+            >
+              <BiLogOutCircle />
+              <span>logout</span>
+            </div>
+            <div className="menu-container">
+              <MenuData />
+            </div>
           </div>
         ) : (
-          <div />
+          <div className="menu-container">
+            <Route path="/login" component={LoginForm} />
+            <Route path="/sign-up" component={SignupForm} />
+            <Route path="/" exact component={MenuData} />
+          </div>
         )}
-        <Route path="/login" component={LoginForm} />
-        <Route path="/sign-up" component={SignupForm} />
-        <Route path="/" exact component={MenuData} />
       </div>
     </div>
   );
