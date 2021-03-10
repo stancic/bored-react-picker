@@ -12,7 +12,9 @@ const MenuData: FunctionComponent = () => {
     <div className="menu-data-container">
       {user !== 401 && user !== null ? (
         <>
-          <span className="open hover username">Hello {user.username}</span>
+          <span className="open hover username">
+            Hello {user.user.username}
+          </span>
           <Link to="/" className="link">
             <h1 className="menu-title hover">Bored?</h1>
           </Link>
