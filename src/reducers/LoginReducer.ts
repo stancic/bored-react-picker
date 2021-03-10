@@ -4,7 +4,7 @@ import { login } from "../services/LoginServices";
 const loginReducer = (state = null, action: any) => {
   switch (action.type) {
     case "LOGIN":
-      return action.data.user;
+      return action.data.user.user;
     case "LOGOUT":
       return action.data;
     default:
