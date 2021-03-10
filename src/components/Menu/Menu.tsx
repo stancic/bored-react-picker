@@ -1,16 +1,23 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 // Components
 import { Turn as Hamburger } from "hamburger-react";
+import { BiLogOutCircle } from "react-icons/bi";
 import MenuData from "./MenuData/MenuData";
 import LoginForm from "./Login/LoginForm";
 import SignupForm from "./Signup/SignupForm";
 import { Route, Link } from "react-router-dom";
 
+// Reducers
+import { logout } from "../../reducers/LoginReducer";
+
 // Styles
 import "./Menu.scss";
 
 const Menu: FunctionComponent = () => {
+  const dispatch = useDispatch();
+  const user = useSelector((store: any) => store.user);
   const [menuIconState, setMenuIconState] = useState<boolean>(false);
   const [showMenuIcon, setShowMenuIcon] = useState<boolean>(true);
 
@@ -22,6 +29,11 @@ const Menu: FunctionComponent = () => {
       setShowMenuIcon(true);
     };
   }, []);
+
+  const handleLogout = (e: any) => {
+    e.preventDefault();
+    dispatch(logout());
+  };
 
   return (
     <div>
@@ -46,6 +58,22 @@ const Menu: FunctionComponent = () => {
             : { marginLeft: "3000px", zIndex: 7 }
         }
       >
+        {user !== null && user !== 401 ? (
+          <div
+            className="logout-button-container"
+            onClick={handleLogout}
+            style={
+              menuIconState
+                ? { marginLeft: "0", zIndex: 7 }
+                : { marginLeft: "3000px", zIndex: 7 }
+            }
+          >
+            <BiLogOutCircle />
+            <span>logout</span>
+          </div>
+        ) : (
+          <div />
+        )}
         <Route path="/login" component={LoginForm} />
         <Route path="/sign-up" component={SignupForm} />
         <Route path="/" exact component={MenuData} />
