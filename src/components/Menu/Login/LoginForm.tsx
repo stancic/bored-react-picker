@@ -1,6 +1,5 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 
 // Components
 import MenuData from "../MenuData/MenuData";
@@ -15,7 +14,6 @@ import "./LoginForm.scss";
 
 const LoginForm: FunctionComponent = () => {
   const dispatch = useDispatch();
-  let redirect = useHistory();
   const user = useSelector((store: any) => store.user);
   const [usernameOrEmail, setUsernameOrEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -38,14 +36,6 @@ const LoginForm: FunctionComponent = () => {
       setPassword("");
     }
   };
-
-  useEffect(() => {
-    if (user) {
-      redirect.push("/");
-    } else if (user === 401) {
-      alert("Wrong credentials");
-    }
-  }, [user, redirect]);
   return (
     <div className="menu-container">
       <div
