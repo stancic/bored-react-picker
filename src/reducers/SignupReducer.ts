@@ -4,7 +4,11 @@ import { signup } from "../services/UserServices";
 const signupReducer = (state = null, action: any) => {
   switch (action.type) {
     case "SIGNUP":
-      return action.data;
+      if (action.data.signedUser.user === undefined) {
+        return null;
+      } else {
+        return action.data.signedUser.user;
+      }
     default:
       return state;
   }
