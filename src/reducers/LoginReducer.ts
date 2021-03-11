@@ -4,7 +4,11 @@ import { login } from "../services/UserServices";
 const loginReducer = (state = null, action: any) => {
   switch (action.type) {
     case "LOGIN":
-      return action.data.user;
+      if (action.data.loggedUser === undefined) {
+        return state;
+      } else {
+        return action.data.loggedUser;
+      }
     case "LOGOUT":
       return action.data;
     default:
@@ -14,10 +18,10 @@ const loginReducer = (state = null, action: any) => {
 
 export const logUser = (credentials: Object) => {
   return async (dispatch: Dispatch<any>) => {
-    const user = await login(credentials);
+    const loggedUser = await login(credentials);
     dispatch({
       type: "LOGIN",
-      data: { user },
+      data: { loggedUser },
     });
   };
 };
