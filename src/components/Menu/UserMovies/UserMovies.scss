@@ -1,0 +1,8 @@
+.user-movies-table-container {
+  max-width: 400px;
+  margin-left: 10em;
+  max-height: 60%;
+  @media (max-width: 1200px) {
+    margin: 100px 0 0 0;
+  }
+}
