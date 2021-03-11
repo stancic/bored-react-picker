@@ -14,7 +14,7 @@ import "./LoginForm.scss";
 
 const LoginForm: FunctionComponent = () => {
   const dispatch = useDispatch();
-  const user = useSelector((store: any) => store.user);
+  const loggedUser = useSelector((store: any) => store.loggedUser);
   const [usernameOrEmail, setUsernameOrEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showLoginForm, setShowLoginForm] = useState<boolean>(true);
@@ -31,7 +31,7 @@ const LoginForm: FunctionComponent = () => {
   const handleLogin = async (event: any) => {
     event.preventDefault();
     dispatch(logUser({ usernameOrEmail, password }));
-    if (user !== 401) {
+    if (loggedUser && loggedUser.status !== 401) {
       setUsernameOrEmail("");
       setPassword("");
     }
@@ -68,7 +68,7 @@ const LoginForm: FunctionComponent = () => {
             variant="contained"
             color="default"
             onClick={handleLogin}
-            className="user-form-submit"
+            className="loggedUser-form-submit"
             type="submit"
           >
             Login
