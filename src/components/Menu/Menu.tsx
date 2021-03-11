@@ -8,8 +8,7 @@ import MenuData from "./MenuData/MenuData";
 import LoginForm from "./Login/LoginForm";
 import SignupForm from "./Signup/SignupForm";
 import { Route, Link, useHistory } from "react-router-dom";
-import WatchedMovies from "./WatchedMovies/WatchedMovies";
-import FavoriteMovies from "./FavoriteMovies/FavoriteMovies";
+import UserMovies from "./UserMovies/UserMovies";
 
 // Reducers
 import { logout } from "../../reducers/LoginReducer";
@@ -92,8 +91,12 @@ const Menu: FunctionComponent = () => {
               </Link>
             </div>
             <div className="menu-container">
-              <Route path="/watched-movies" component={WatchedMovies} />
-              <Route path="/favorite-movies" component={FavoriteMovies} />
+              <Route path="/watched-movies">
+                <UserMovies whichMovies="watched" />
+              </Route>
+              <Route path="/favorite-movies">
+                <UserMovies whichMovies="favorite" />
+              </Route>
               <Route path="/" exact component={MenuData} />
             </div>
           </div>
