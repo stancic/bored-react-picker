@@ -7,18 +7,24 @@ export const setToken = (newToken: string) => {
   token = `Bearer ${newToken}`;
 };
 
-export const getFavoriteMovies = async () => {
+export const getFavoriteMovies = async (userid: string) => {
   const config = {
     headers: { Authorization: token },
   };
-  const response = await axios.get(baseurl + "/favorite-movies", config);
+  const response = await axios.get(
+    baseurl + "/favorite-movies/" + userid,
+    config
+  );
   return response.data;
 };
 
-export const getWatchedMovies = async () => {
+export const getWatchedMovies = async (userid: string) => {
   const config = {
     headers: { Authorization: token },
   };
-  const response = await axios.get(baseurl + "/watched-movies", config);
+  const response = await axios.get(
+    baseurl + "/watched-movies/" + userid,
+    config
+  );
   return response.data;
 };
