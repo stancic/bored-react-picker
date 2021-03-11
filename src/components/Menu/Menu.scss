@@ -30,7 +30,8 @@
     flex-direction: column-reverse;
     justify-content: center;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
+    padding: 0;
   }
   .logout-button-container {
     color: black;
