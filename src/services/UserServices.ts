@@ -15,8 +15,17 @@ export const signup = async (data: Object) => {
   const url = baseurl + "/sign-up";
   try {
     const response = await axios.post(url, data);
-    return response.data;
+    const res = {
+      status: response.status,
+      user: response.data.user,
+      message: response.data.message,
+    };
+    return res;
   } catch (error) {
-    return error.response.status;
+    const er = {
+      status: error.response.status,
+      message: error.response.data.message,
+    };
+    return er;
   }
 };
