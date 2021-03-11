@@ -46,17 +46,17 @@ const SignupForm: FunctionComponent = () => {
   };
 
   useEffect(() => {
-    console.log(signedUser);
-  }, [signedUser]);
-
-  useEffect(() => {
-    if (signedUser !== 400 && signedUser !== 409) {
-      alert("Thanks for signing up");
+    if (signedUser && signedUser.status === 200) {
+      alert(signedUser.message + "\nYou can login now.");
       redirect.push("/");
-    } else if (signedUser === 409 || signedUser === 400) {
-      alert("Ooops try again");
+    } else if (
+      signedUser &&
+      (signedUser.status === 409 || signedUser.status === 400)
+    ) {
+      alert(signedUser.message);
     }
   }, [signedUser, redirect]);
+
   return (
     <div className="menu-container">
       <div
