@@ -9,6 +9,7 @@ export const login = async (credentials: Object) => {
       status: response.status,
       user: response.data.user,
       message: response.data.message,
+      token: response.data.token,
     };
     return res;
   } catch (error) {
