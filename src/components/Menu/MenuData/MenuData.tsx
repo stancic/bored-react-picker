@@ -7,13 +7,13 @@ import { Link } from "react-router-dom";
 import "./MenuData.scss";
 
 const MenuData: FunctionComponent = () => {
-  const user = useSelector((store: any) => store.user);
+  const loggedUser = useSelector((store: any) => store.loggedUser);
   return (
     <div className="menu-data-container">
-      {user !== 401 && user !== null ? (
+      {loggedUser && loggedUser.status === 200 ? (
         <>
           <span className="open hover username">
-            Hello {user.user.username}
+            Hello {loggedUser.user.username}
           </span>
           <Link to="/" className="link">
             <h1 className="menu-title hover">Bored?</h1>
