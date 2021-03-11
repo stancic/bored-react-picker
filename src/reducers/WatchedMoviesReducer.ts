@@ -14,10 +14,10 @@ const watchedMoviesReducer = (state = null, action: any) => {
   }
 };
 
-export const getAllWatchedMovies = (userToken: string) => {
+export const getAllWatchedMovies = (userToken: string, userid: string) => {
   return async (dispatch: Dispatch<any>) => {
     setToken(userToken);
-    const watchedMovies = await getWatchedMovies();
+    const watchedMovies = await getWatchedMovies(userid);
     dispatch({
       type: "GET_ALL_WATCHED",
       data: watchedMovies,

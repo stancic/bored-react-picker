@@ -14,10 +14,10 @@ const favoriteMoviesReducer = (state = null, action: any) => {
   }
 };
 
-export const getAllFavoriteMovies = (userToken: string) => {
+export const getAllFavoriteMovies = (userToken: string, userid: string) => {
   return async (dispatch: Dispatch<any>) => {
     setToken(userToken);
-    const favoriteMovies = await getFavoriteMovies();
+    const favoriteMovies = await getFavoriteMovies(userid);
     dispatch({
       type: "GET_ALL_FAVORITES",
       data: favoriteMovies,
