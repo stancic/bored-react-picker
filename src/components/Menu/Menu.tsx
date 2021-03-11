@@ -19,8 +19,7 @@ import "./Menu.scss";
 
 const Menu: FunctionComponent = () => {
   const dispatch = useDispatch();
-  const user = useSelector((store: any) => store.user);
-  const signedUser = useSelector((store: any) => store.signedUser);
+  const loggedUser = useSelector((store: any) => store.loggedUser);
   let redirect = useHistory();
   const [menuIconState, setMenuIconState] = useState<boolean>(false);
   const [showMenuIcon, setShowMenuIcon] = useState<boolean>(true);
@@ -39,15 +38,16 @@ const Menu: FunctionComponent = () => {
     dispatch(logout());
   };
   useEffect(() => {
-    if (user !== 401 && user !== null && user !== undefined) {
+    if (loggedUser && loggedUser.status === 200) {
+      alert(loggedUser.message);
       redirect.push("/");
-    } else if (user === 401) {
-      alert("Wrong credentials");
-    } else if (signedUser === 409 || signedUser === 409) {
-      alert("Ooops try again");
+    } else if (
+      loggedUser &&
+      (loggedUser.status === 401 || loggedUser.status === 400)
+    ) {
+      alert(loggedUser.message);
     }
-  }, [user, redirect, signedUser]);
-
+  }, [loggedUser, redirect]);
   return (
     <div>
       <div
@@ -71,7 +71,7 @@ const Menu: FunctionComponent = () => {
             : { marginLeft: "3000px", zIndex: 7 }
         }
       >
-        {user !== null && user !== 401 ? (
+        {loggedUser && loggedUser.status === 200 ? (
           <div className="menu-container">
             <div
               className="logout-button-container "
