@@ -13,6 +13,8 @@ import FavoriteMovies from "./FavoriteMovies/FavoriteMovies";
 
 // Reducers
 import { logout } from "../../reducers/LoginReducer";
+import { getAllFavoriteMovies } from "../../reducers/FavoriteMoviesReducer";
+import { getAllWatchedMovies } from "../../reducers/WatchedMoviesReducer";
 
 // Styles
 import "./Menu.scss";
@@ -40,6 +42,8 @@ const Menu: FunctionComponent = () => {
   useEffect(() => {
     if (loggedUser && loggedUser.status === 200) {
       alert(loggedUser.message);
+      dispatch(getAllFavoriteMovies(loggedUser.token));
+      dispatch(getAllWatchedMovies(loggedUser.token));
       redirect.push("/");
     } else if (
       loggedUser &&
@@ -47,7 +51,7 @@ const Menu: FunctionComponent = () => {
     ) {
       alert(loggedUser.message);
     }
-  }, [loggedUser, redirect]);
+  }, [dispatch, loggedUser, redirect]);
   return (
     <div>
       <div
