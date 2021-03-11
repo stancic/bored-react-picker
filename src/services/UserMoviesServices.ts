@@ -29,6 +29,17 @@ export const deleteFavoriteMovie = async (movieid: string) => {
   return response.data;
 };
 
+export const deleteWatchedMovie = async (movieid: string) => {
+  const config = {
+    headers: { Authorization: token },
+  };
+  const response = await axios.delete(
+    baseurl + "/watched-movies/" + movieid,
+    config
+  );
+  return response.data;
+};
+
 export const getWatchedMovies = async (userid: string) => {
   const config = {
     headers: { Authorization: token },
