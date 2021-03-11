@@ -41,7 +41,6 @@ const Menu: FunctionComponent = () => {
   useEffect(() => {
     if (loggedUser && loggedUser.status === 200) {
       alert(loggedUser.message);
-      console.log(loggedUser);
       dispatch(getAllFavoriteMovies(loggedUser.token, loggedUser.user.id));
       dispatch(getAllWatchedMovies(loggedUser.token, loggedUser.user.id));
       redirect.push("/");
