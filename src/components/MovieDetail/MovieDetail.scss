@@ -27,14 +27,37 @@
     flex: 0.5;
     display: flex;
     align-items: center;
+    .logged-user-buttons-container {
+      margin-left: 2em;
+      margin-top: 1em;
+      @media (max-width: 920px) {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-left: 0;
+        margin-bottom: 2em;
+      }
+      .add-to-watched-button {
+        margin-left: 2em;
+        @media (max-width: 920px) {
+          margin-top: 2em;
+          margin-left: 0;
+        }
+      }
+    }
     .open-movie-title {
       margin-left: 1em;
       margin-top: 1em;
+
       @media (max-width: 568px) {
         margin-left: 0.3em;
         margin-right: 0.3em;
         text-align: center;
       }
+    }
+    @media (max-width: 920px) {
+      flex-direction: column;
     }
   }
   .open-movie-data-container {
