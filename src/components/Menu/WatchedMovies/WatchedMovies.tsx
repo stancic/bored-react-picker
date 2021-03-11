@@ -28,7 +28,7 @@ const WatchedMovies: FunctionComponent = () => {
   ];
   return (
     <div className="menu-container">
-      <div className="watched-movies-table-container">
+      <div className="watched-movies user-movies-table-container">
         <Table columns={columns} data={data} />
       </div>
       <MenuData />
