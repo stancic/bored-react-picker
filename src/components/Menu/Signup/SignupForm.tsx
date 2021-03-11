@@ -38,7 +38,7 @@ const SignupForm: FunctionComponent = () => {
       password: password,
     };
     dispatch(userSignup(user));
-    if (signedUser !== 409) {
+    if (signedUser.status !== 409 || signedUser.status !== 400) {
       setUsername("");
       setEmail("");
       setPassword("");
