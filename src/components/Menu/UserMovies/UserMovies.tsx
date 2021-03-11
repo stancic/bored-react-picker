@@ -14,6 +14,7 @@ import Button from "@material-ui/core/Button";
 
 // Reducers
 import { removeMovieFromFavorites } from "../../../reducers/FavoriteMoviesReducer";
+import { removeMovieFromWatched } from "../../../reducers/WatchedMoviesReducer";
 
 // Styles
 import "./UserMovies.scss";
@@ -37,6 +38,8 @@ const UserMovies: FunctionComponent<Params> = (Params) => {
   const handleMovieRemove = (movieId: string, movieIndex: number) => {
     if (location.pathname.toLowerCase().includes("favorite")) {
       dispatch(removeMovieFromFavorites(loggedUser.token, movieId, movieIndex));
+    } else {
+      dispatch(removeMovieFromWatched(loggedUser.token, movieId, movieIndex));
     }
   };
   return (
