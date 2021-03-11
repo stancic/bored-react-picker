@@ -5,7 +5,7 @@ import loginReducer from "./reducers/LoginReducer";
 import signupReducer from "./reducers/SignupReducer";
 
 const reducer = combineReducers({
-  user: loginReducer,
+  loggedUser: loginReducer,
   signedUser: signupReducer,
 });
 
