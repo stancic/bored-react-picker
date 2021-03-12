@@ -5,6 +5,7 @@ import {
   setToken,
   FavoriteMoviesServices,
 } from "../services/UserMoviesServices";
+import { getMovieDetail } from "../services/MoviesServices";
 
 // Interfaces
 interface AddToFavoritesMovie {
@@ -23,7 +24,7 @@ const favoriteMoviesReducer = (state: any = [], action: any) => {
         return action.data;
       }
     case "ADD_TO_FAVORITES":
-      return state.concat(action.data.addToFavorites.result);
+      return state.concat(action.data);
     case "REMOVE_FAVORITE":
       return state.filter((item: any) => item !== state[action.index]);
     default:
@@ -34,12 +35,16 @@ const favoriteMoviesReducer = (state: any = [], action: any) => {
 export const getAllFavoriteMovies = (userToken: string, userId: string) => {
   return async (dispatch: Dispatch<any>) => {
     setToken(userToken);
+    const favoriteMoviesWithDetails: any = [];
     const favoriteMovies = await favoriteMoviesServices.getFavoriteMovies(
       userId
     );
-    dispatch({
+    favoriteMovies.map(async (movie: any) => {
+      favoriteMoviesWithDetails.push(await getMovieDetail(movie.movieId));
+    });
+    await dispatch({
       type: "GET_ALL_FAVORITES",
-      data: favoriteMovies,
+      data: favoriteMoviesWithDetails,
     });
   };
 };
@@ -72,9 +77,12 @@ export const addToFavorites = (movieToAdd: AddToFavoritesMovie) => {
     const addToFavorites = await favoriteMoviesServices.addToFavoriteMovies(
       favoriteMovie
     );
+    const favoriteMovieDetails = await getMovieDetail(
+      addToFavorites.result.movieId
+    );
     dispatch({
       type: "ADD_TO_FAVORITES",
-      data: { addToFavorites },
+      data: favoriteMovieDetails,
     });
   };
 };

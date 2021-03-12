@@ -5,6 +5,7 @@ import {
   setToken,
   WatchedMoviesServices,
 } from "../services/UserMoviesServices";
+import { getMovieDetail } from "../services/MoviesServices";
 
 // Interfaces
 interface AddToWatchedMovie {
@@ -23,7 +24,7 @@ const watchedMoviesReducer = (state: any = [], action: any) => {
         return action.data;
       }
     case "ADD_TO_WATCHED":
-      return state.concat(action.data.addToWatched.result);
+      return state.concat(action.data);
     case "REMOVE_WATCHED":
       return state.filter((item: any) => item !== state[action.index]);
     default:
@@ -34,10 +35,14 @@ const watchedMoviesReducer = (state: any = [], action: any) => {
 export const getAllWatchedMovies = (userToken: string, userid: string) => {
   return async (dispatch: Dispatch<any>) => {
     setToken(userToken);
+    const watchedMoviesWithDetails: any = [];
     const watchedMovies = await watchedMoviesServices.getWatchedMovies(userid);
+    watchedMovies.map(async (movie: any) => {
+      watchedMoviesWithDetails.push(await getMovieDetail(movie.movieId));
+    });
     dispatch({
       type: "GET_ALL_WATCHED",
-      data: watchedMovies,
+      data: watchedMoviesWithDetails,
     });
   };
 };
@@ -70,9 +75,12 @@ export const addToWatched = (movieToAdd: AddToWatchedMovie) => {
     const addToWatched = await watchedMoviesServices.addToWatchedMovies(
       watchedMovie
     );
+    const watchedMovieDetails = await getMovieDetail(
+      addToWatched.result.movieId
+    );
     dispatch({
       type: "ADD_TO_WATCHED",
-      data: { addToWatched },
+      data: watchedMovieDetails,
     });
   };
 };
