@@ -4,14 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 // Components
 import { SiImdb, SiYoutube } from "react-icons/si";
 import { AiOutlineClose } from "react-icons/ai";
-import StarRatingComponent from "react-star-rating-component";
 import Button from "@material-ui/core/Button";
 import StarsIcon from "@material-ui/icons/Stars";
+import StarBorderIcon from "@material-ui/icons/StarBorder";
 import VisibilityIcon from "@material-ui/icons/Visibility";
+import Rating from "@material-ui/lab/Rating";
 
 // Reducers
 import { addToFavorites } from "../../reducers/FavoriteMoviesReducer";
 import { addToWatched } from "../../reducers/WatchedMoviesReducer";
+import { rateSelectedMovie } from "../../reducers/RatedMoviesReducer";
 
 // Styles
 import "./MovieDetail.scss";
@@ -40,9 +42,8 @@ const MovieDetail: FunctionComponent<Props> = ({ movie, guestSessionID }) => {
   const [imdbID, setImdbID] = useState(0);
   const [trailerID, setTrailerID] = useState<any>(undefined);
   const [openTrailerFlag, setOpenTrailerFlag] = useState<boolean>(true);
-  const [movieRatingHelper, setMovieRatingHelper] = useState<number>(0);
-  const [rateFlag, setRateFlag] = useState<boolean>(false);
-  const [ratedMovieID, setRatedMovieID] = useState<any>(undefined);
+  const [movieRating, setMovieRating] = useState<number>(0.5);
+  const ratedMovies = useSelector((store: any) => store.ratedMovies);
 
   // user stuff
   const loggedUser = useSelector((store: any) => store.loggedUser);
@@ -68,20 +69,6 @@ const MovieDetail: FunctionComponent<Props> = ({ movie, guestSessionID }) => {
     setOpenTrailerFlag((prev: boolean) => !prev);
   };
 
-  const changeRatingWhileHover = (newRating: number) => {
-    setMovieRatingHelper(newRating);
-  };
-  const changeRating = () => {
-    if (rateFlag && ratedMovieID === movieDetail.id) {
-      alert("You've already rated this movie");
-    } else {
-      rateMovie(movieDetail.id, movieRatingHelper, guestSessionID);
-      setRateFlag(true);
-      setRatedMovieID(movieDetail.id);
-      alert("Thanks for rating this movie");
-    }
-  };
-
   const handleAddToFavorites = () => {
     const movieToAdd = {
       movieId: movieDetail.id,
@@ -99,6 +86,25 @@ const MovieDetail: FunctionComponent<Props> = ({ movie, guestSessionID }) => {
     };
     dispatch(addToWatched(movieToAdd));
   };
+
+  const handleRate = (movieRating: number) => {
+    setMovieRating(movieRating);
+    let movieToRate: any = {};
+    if (loggedUser !== null) {
+      movieToRate = {
+        movieId: movieDetail.id,
+        rate: movieRating,
+        userId: loggedUser.user.id,
+        userToken: loggedUser.token,
+      };
+      dispatch(rateSelectedMovie(movieToRate));
+    }
+    rateMovie(movieToRate.movieId, movieToRate.rate, guestSessionID);
+  };
+
+  useEffect(() => {
+    console.log(ratedMovies);
+  }, [ratedMovies]);
 
   return (
     <div>
@@ -161,16 +167,30 @@ const MovieDetail: FunctionComponent<Props> = ({ movie, guestSessionID }) => {
           </div>
           <div className="open-movie-right-side-container">
             <div className="open-movie-rating-container">
-              <p>Rate this movie:</p>
-              <StarRatingComponent
-                name="movieRating"
-                starCount={10}
-                starColor="yellow"
-                emptyStarColor="white"
-                value={movieRatingHelper}
-                onStarHover={changeRatingWhileHover}
-                onStarClick={changeRating}
-              />
+              {loggedUser && loggedUser.status === 200 ? (
+                <>
+                  <p>Rate this movie:</p>
+                  <Rating
+                    name="half-rating"
+                    defaultValue={0}
+                    precision={0.5}
+                    size="large"
+                    emptyIcon={
+                      <StarBorderIcon
+                        style={{ color: "white", fontSize: 30 }}
+                      />
+                    }
+                    value={movieRating / 2}
+                    onChange={(event, newValue) => {
+                      if (newValue) {
+                        handleRate(newValue * 2);
+                      }
+                    }}
+                  />
+                </>
+              ) : (
+                <></>
+              )}
             </div>
             <div className="open-movie-overview-and-imdbyt-container">
               <div className="open-movie-overview-container">
