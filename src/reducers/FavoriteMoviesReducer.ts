@@ -1,9 +1,17 @@
 import { Dispatch } from "redux";
+
+//Services
 import {
   setToken,
   FavoriteMoviesServices,
 } from "../services/UserMoviesServices";
 
+// Interfaces
+interface AddToFavoritesMovie {
+  movieId: string;
+  userId: string;
+  userToken: string;
+}
 const favoriteMoviesServices = new FavoriteMoviesServices();
 
 const favoriteMoviesReducer = (state: any = [], action: any) => {
@@ -15,7 +23,7 @@ const favoriteMoviesReducer = (state: any = [], action: any) => {
         return action.data;
       }
     case "ADD_TO_FAVORITES":
-      return state.concat(action.data.addToFavorites);
+      return state.concat(action.data.addToFavorites.result);
     case "REMOVE_FAVORITE":
       return state.filter((item: any) => item !== state[action.index]);
     default:
@@ -54,15 +62,15 @@ export const removeMovieFromFavorites = (
   };
 };
 
-export const addToFavorites = (user: any, movieId: number) => {
+export const addToFavorites = (movieToAdd: AddToFavoritesMovie) => {
   return async (dispatch: Dispatch<any>) => {
-    const movieToAdd = {
-      movieId: movieId,
-      userId: user.id,
+    const favoriteMovie = {
+      movieId: movieToAdd.movieId,
+      userId: movieToAdd.userId,
     };
-    setToken(user.token);
-    const addToFavorites = await favoriteMoviesServices.addToFavoriteMoives(
-      movieToAdd
+    setToken(movieToAdd.userToken);
+    const addToFavorites = await favoriteMoviesServices.addToFavoriteMovies(
+      favoriteMovie
     );
     dispatch({
       type: "ADD_TO_FAVORITES",
