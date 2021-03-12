@@ -35,7 +35,7 @@ const UserMovies: FunctionComponent<Params> = (Params) => {
     ? (userMovies = favoriteMovies)
     : (userMovies = watchedMovies);
 
-  const handleMovieRemove = (movieId: string, movieIndex: number) => {
+  const handleMovieRemove = (movieId: number, movieIndex: number) => {
     if (location.pathname.toLowerCase().includes("favorite")) {
       dispatch(removeMovieFromFavorites(loggedUser.token, movieId, movieIndex));
     } else {
@@ -49,7 +49,7 @@ const UserMovies: FunctionComponent<Params> = (Params) => {
           <TableHead>
             <TableRow>
               <TableCell>#</TableCell>
-              <TableCell align="right">Movie ID</TableCell>
+              <TableCell align="right">Movie title</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -58,7 +58,7 @@ const UserMovies: FunctionComponent<Params> = (Params) => {
                 <TableCell component="th" scope="row">
                   {index + 1}
                 </TableCell>
-                <TableCell align="right">{movie.movieId}</TableCell>
+                <TableCell align="right">{movie.title}</TableCell>
                 <TableCell align="right">
                   <Button
                     variant="outlined"
