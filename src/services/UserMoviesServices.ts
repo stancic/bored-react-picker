@@ -32,12 +32,12 @@ export class FavoriteMoviesServices {
     return response.data;
   };
 
-  deleteFavoriteMovie = async (movieid: string) => {
+  deleteFavoriteMovie = async (movieId: number) => {
     const config = {
       headers: { Authorization: token },
     };
     const response = await axios.delete(
-      baseurl + "/favorite-movies/" + movieid,
+      baseurl + "/favorite-movies/" + movieId,
       config
     );
     return response.data;
@@ -68,12 +68,12 @@ export class WatchedMoviesServices {
     return response.data;
   };
 
-  deleteWatchedMovie = async (movieid: string) => {
+  deleteWatchedMovie = async (movieId: number) => {
     const config = {
       headers: { Authorization: token },
     };
     const response = await axios.delete(
-      baseurl + "/watched-movies/" + movieid,
+      baseurl + "/watched-movies/" + movieId,
       config
     );
     return response.data;
