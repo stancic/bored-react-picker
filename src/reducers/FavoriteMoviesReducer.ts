@@ -51,7 +51,7 @@ export const getAllFavoriteMovies = (userToken: string, userId: string) => {
 
 export const removeMovieFromFavorites = (
   userToken: string,
-  movieId: string,
+  movieId: number,
   movieIndex: number
 ) => {
   return async (dispatch: Dispatch<any>) => {

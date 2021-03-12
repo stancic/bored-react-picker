@@ -49,7 +49,7 @@ export const getAllWatchedMovies = (userToken: string, userid: string) => {
 
 export const removeMovieFromWatched = (
   userToken: string,
-  movieId: string,
+  movieId: number,
   movieIndex: number
 ) => {
   return async (dispatch: Dispatch<any>) => {
