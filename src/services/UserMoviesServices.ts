@@ -20,7 +20,7 @@ export class FavoriteMoviesServices {
     return response.data;
   };
 
-  addToFavoriteMoives = async (movieToAdd: Object) => {
+  addToFavoriteMovies = async (movieToAdd: Object) => {
     const config = {
       headers: { Authorization: token },
     };
@@ -51,6 +51,18 @@ export class WatchedMoviesServices {
     };
     const response = await axios.get(
       baseurl + "/watched-movies/" + userid,
+      config
+    );
+    return response.data;
+  };
+
+  addToWatchedMovies = async (movieToAdd: Object) => {
+    const config = {
+      headers: { Authorization: token },
+    };
+    const response = await axios.post(
+      baseurl + "/watched-movies",
+      movieToAdd,
       config
     );
     return response.data;
