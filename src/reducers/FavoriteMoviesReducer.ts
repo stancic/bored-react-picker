@@ -4,7 +4,7 @@ import { Dispatch } from "redux";
 import {
   setToken,
   FavoriteMoviesServices,
-} from "../services/UserMoviesServices";
+} from "../services/FavoriteMoviesServices";
 import { getMovieDetail } from "../services/MoviesServices";
 
 // Interfaces
