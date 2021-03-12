@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // Components
 import { SiImdb, SiYoutube } from "react-icons/si";
@@ -8,6 +8,10 @@ import StarRatingComponent from "react-star-rating-component";
 import Button from "@material-ui/core/Button";
 import StarsIcon from "@material-ui/icons/Stars";
 import VisibilityIcon from "@material-ui/icons/Visibility";
+
+// Reducers
+import { addToFavorites } from "../../reducers/FavoriteMoviesReducer";
+import { addToWatched } from "../../reducers/WatchedMoviesReducer";
 
 // Styles
 import "./MovieDetail.scss";
@@ -19,12 +23,15 @@ import {
   rateMovie,
 } from "../../services/MoviesServices";
 
+// Interfaces
 interface Props {
   movie: any;
   guestSessionID: string;
 }
 
 const MovieDetail: FunctionComponent<Props> = ({ movie, guestSessionID }) => {
+  const dispatch = useDispatch();
+
   //movie stuff
   const movieDetail = movie;
   const posterPath = "https://image.tmdb.org/t/p/w200";
@@ -74,6 +81,25 @@ const MovieDetail: FunctionComponent<Props> = ({ movie, guestSessionID }) => {
       alert("Thanks for rating this movie");
     }
   };
+
+  const handleAddToFavorites = () => {
+    const movieToAdd = {
+      movieId: movieDetail.id,
+      userId: loggedUser.user.id,
+      userToken: loggedUser.token,
+    };
+    dispatch(addToFavorites(movieToAdd));
+  };
+
+  const handleAddToWatched = () => {
+    const movieToAdd = {
+      movieId: movieDetail.id,
+      userId: loggedUser.user.id,
+      userToken: loggedUser.token,
+    };
+    dispatch(addToWatched(movieToAdd));
+  };
+
   return (
     <div>
       <AiOutlineClose
@@ -96,6 +122,7 @@ const MovieDetail: FunctionComponent<Props> = ({ movie, guestSessionID }) => {
                 color="primary"
                 startIcon={<StarsIcon />}
                 className="add-to-favorites-button"
+                onClick={handleAddToFavorites}
               >
                 Add to favorites
               </Button>
@@ -105,6 +132,7 @@ const MovieDetail: FunctionComponent<Props> = ({ movie, guestSessionID }) => {
                 color="default"
                 startIcon={<VisibilityIcon />}
                 className="add-to-watched-button"
+                onClick={handleAddToWatched}
               >
                 Add to watched
               </Button>
