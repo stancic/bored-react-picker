@@ -48,6 +48,5 @@ export const rateMovie = async (
     detailBaseURL +
     `${movieID}/rating?api_key=${process.env.REACT_APP_API_KEY}&guest_session_id=${guestSessionID}`;
   const response = await axios.post(url, { value: rating });
-  console.log(response);
   return response.data;
 };
