@@ -24,6 +24,7 @@ import {
   getTrailer,
   rateMovie,
 } from "../../services/MoviesServices";
+import { IMovieToRate } from "../../services/RatedMoviesServices";
 
 // Interfaces
 interface Props {
@@ -43,7 +44,6 @@ const MovieDetail: FunctionComponent<Props> = ({ movie, guestSessionID }) => {
   const [trailerID, setTrailerID] = useState<any>(undefined);
   const [openTrailerFlag, setOpenTrailerFlag] = useState<boolean>(true);
   const [movieRating, setMovieRating] = useState<number>(0.5);
-  const ratedMovies = useSelector((store: any) => store.ratedMovies);
 
   // user stuff
   const loggedUser = useSelector((store: any) => store.loggedUser);
@@ -89,7 +89,7 @@ const MovieDetail: FunctionComponent<Props> = ({ movie, guestSessionID }) => {
 
   const handleRate = (movieRating: number) => {
     setMovieRating(movieRating);
-    let movieToRate: any = {};
+    let movieToRate: IMovieToRate = {};
     if (loggedUser !== null) {
       movieToRate = {
         movieId: movieDetail.id,
@@ -97,14 +97,10 @@ const MovieDetail: FunctionComponent<Props> = ({ movie, guestSessionID }) => {
         userId: loggedUser.user.id,
         userToken: loggedUser.token,
       };
-      dispatch(rateSelectedMovie(movieToRate));
+      dispatch(rateSelectedMovie(movieToRate, movieDetail.title));
+      rateMovie(movieDetail.id, movieToRate.rate, guestSessionID);
     }
-    rateMovie(movieToRate.movieId, movieToRate.rate, guestSessionID);
   };
-
-  useEffect(() => {
-    console.log(ratedMovies);
-  }, [ratedMovies]);
 
   return (
     <div>
