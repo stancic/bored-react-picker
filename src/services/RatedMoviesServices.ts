@@ -5,9 +5,9 @@ let token: string | null = null;
 
 // Interfaces
 export interface IMovieToRate {
-  rate: number;
-  movieId: string;
-  userId: string;
+  rate?: number;
+  movieId?: string;
+  userId?: string;
   userToken?: string;
 }
 
