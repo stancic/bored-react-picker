@@ -12,6 +12,9 @@ import { userSignup } from "../../../reducers/SignupReducer";
 // Styles
 import "./SignupForm.scss";
 
+// Interfaces
+import { ISignupCredentials } from "../../../services/UserServices";
+
 const SignupForm: FunctionComponent = () => {
   const dispatch = useDispatch();
   let redirect = useHistory();
@@ -30,9 +33,9 @@ const SignupForm: FunctionComponent = () => {
     };
   }, []);
 
-  const handleSignup = (e: any) => {
-    e.preventDefault();
-    const user = {
+  const handleSignup = (event: React.MouseEvent) => {
+    event.preventDefault();
+    const user: ISignupCredentials = {
       username: username,
       email: email,
       password: password,
