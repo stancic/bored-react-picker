@@ -2,7 +2,7 @@ import { Dispatch } from "redux";
 import {
   setToken,
   RatedMoviesServices,
-  MovieToRate,
+  IMovieToRate,
 } from "../services/RatedMoviesServices";
 
 const ratedMoviesServices = new RatedMoviesServices();
@@ -16,7 +16,7 @@ const ratedMoviesReducer = (state: any = [], action: any) => {
   }
 };
 
-export const rateSelectedMovie = (movieToRate: MovieToRate) => {
+export const rateSelectedMovie = (movieToRate: IMovieToRate) => {
   return async (dispatch: Dispatch<any>) => {
     const movie = {
       rate: movieToRate.rate,

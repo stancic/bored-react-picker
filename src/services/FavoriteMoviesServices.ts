@@ -1,13 +1,21 @@
 import axios from "axios";
 const baseurl = "http://localhost:3002/api";
 
+// Interfaces
+export interface IFavoriteMovie {
+  createdAt: Date;
+  id: string;
+  movieId: number;
+  updatedAt: Date;
+  userId: string;
+}
+
 let token: string | null = null;
 
 export const setToken = (newToken: string) => {
   token = `Bearer ${newToken}`;
 };
 
-// Favorites
 export class FavoriteMoviesServices {
   getFavoriteMovies = async (userid: string) => {
     const config = {
@@ -17,7 +25,8 @@ export class FavoriteMoviesServices {
       baseurl + "/favorite-movies/" + userid,
       config
     );
-    return response.data;
+    const res: [IFavoriteMovie] = response.data;
+    return res;
   };
 
   addToFavoriteMovies = async (movieToAdd: Object) => {

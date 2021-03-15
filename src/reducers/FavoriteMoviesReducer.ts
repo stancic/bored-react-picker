@@ -2,6 +2,7 @@ import { Dispatch } from "redux";
 
 //Services
 import {
+  IFavoriteMovie,
   setToken,
   FavoriteMoviesServices,
 } from "../services/FavoriteMoviesServices";
@@ -39,7 +40,7 @@ export const getAllFavoriteMovies = (userToken: string, userId: string) => {
     const favoriteMovies = await favoriteMoviesServices.getFavoriteMovies(
       userId
     );
-    favoriteMovies.map(async (movie: any) => {
+    favoriteMovies.map(async (movie: IFavoriteMovie) => {
       favoriteMoviesWithDetails.push(await getMovieDetail(movie.movieId));
     });
     await dispatch({

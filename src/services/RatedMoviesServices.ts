@@ -4,7 +4,7 @@ const baseurl = "http://localhost:3002/api";
 let token: string | null = null;
 
 // Interfaces
-export interface MovieToRate {
+export interface IMovieToRate {
   rate: number;
   movieId: string;
   userId: string;
@@ -16,7 +16,7 @@ export const setToken = (newToken: string) => {
 };
 
 export class RatedMoviesServices {
-  rateMovie = async (movieToRate: MovieToRate) => {
+  rateMovie = async (movieToRate: IMovieToRate) => {
     const config = {
       headers: { Authorization: token },
     };
