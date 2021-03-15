@@ -12,6 +12,9 @@ import { logUser } from "../../../reducers/LoginReducer";
 // Styles
 import "./LoginForm.scss";
 
+// Interfaces
+import { ILoginCredentials } from "../../../services/UserServices";
+
 const LoginForm: FunctionComponent = () => {
   const dispatch = useDispatch();
   const loggedUser = useSelector((store: any) => store.loggedUser);
@@ -28,9 +31,13 @@ const LoginForm: FunctionComponent = () => {
     };
   }, []);
 
-  const handleLogin = async (event: any) => {
+  const handleLogin = async (event: React.MouseEvent) => {
     event.preventDefault();
-    dispatch(logUser({ usernameOrEmail, password }));
+    const loginCredentials: ILoginCredentials = {
+      usernameOrEmail: usernameOrEmail,
+      password: password,
+    };
+    dispatch(logUser(loginCredentials));
     if (loggedUser && loggedUser.status !== 401) {
       setUsernameOrEmail("");
       setPassword("");
