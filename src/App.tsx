@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 
 // Components
 import ChooseCategory from "./components/ChooseCategory/ChooseCategory";
@@ -9,7 +9,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 // Services
 import { getGuestToken } from "./services/MoviesServices";
 
-const App = () => {
+const App: FunctionComponent = () => {
   const [movies, setMovies] = useState<any>([]);
   const [year, setYear] = useState<number | undefined>(0);
   const [genreID, setGenreID] = useState<number | undefined>(0);
