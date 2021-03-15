@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useState } from "react";
+import React, { useEffect, useState, FunctionComponent } from "react";
 
 // Components
 import ChooseCategory from "./components/ChooseCategory/ChooseCategory";
