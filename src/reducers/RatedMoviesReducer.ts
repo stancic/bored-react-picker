@@ -10,13 +10,21 @@ const ratedMoviesServices = new RatedMoviesServices();
 const ratedMoviesReducer = (state: any = [], action: any) => {
   switch (action.type) {
     case "RATE_MOVIE":
+      if (action.data.status === 500) {
+        alert(`You've already rated ${action.title}`);
+      } else {
+        alert(`Thanks for rating ${action.title}`);
+      }
       return action.data;
     default:
       return state;
   }
 };
 
-export const rateSelectedMovie = (movieToRate: IMovieToRate) => {
+export const rateSelectedMovie = (
+  movieToRate: IMovieToRate,
+  movieTitle: string
+) => {
   return async (dispatch: Dispatch<any>) => {
     const movie = {
       rate: movieToRate.rate,
@@ -30,6 +38,7 @@ export const rateSelectedMovie = (movieToRate: IMovieToRate) => {
     dispatch({
       type: "RATE_MOVIE",
       data: ratedMovie,
+      title: movieTitle,
     });
   };
 };
