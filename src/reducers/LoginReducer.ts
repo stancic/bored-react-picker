@@ -1,7 +1,22 @@
 import { Dispatch } from "redux";
-import { login } from "../services/UserServices";
+import {
+  ILoginCredentials,
+  IError,
+  IUser,
+  login,
+} from "../services/UserServices";
 
-const loginReducer = (state = null, action: any) => {
+// Interfaces
+interface ILoginAction {
+  type: string;
+  data: any;
+  loggedUser?: IError | IUser;
+}
+
+const loginReducer = (
+  state: IError | IUser | null = null,
+  action: ILoginAction
+) => {
   switch (action.type) {
     case "LOGIN":
       if (action.data.loggedUser === undefined) {
@@ -16,9 +31,9 @@ const loginReducer = (state = null, action: any) => {
   }
 };
 
-export const logUser = (credentials: Object) => {
+export const logUser = (credentials: ILoginCredentials) => {
   return async (dispatch: Dispatch<any>) => {
-    const loggedUser = await login(credentials);
+    const loggedUser: IError | IUser = await login(credentials);
     dispatch({
       type: "LOGIN",
       data: { loggedUser },
