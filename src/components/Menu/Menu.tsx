@@ -34,13 +34,12 @@ const Menu: FunctionComponent = () => {
     };
   }, []);
 
-  const handleLogout = (e: any) => {
-    e.preventDefault();
+  const handleLogout = (event: React.MouseEvent) => {
+    event.preventDefault();
     dispatch(logout());
   };
   useEffect(() => {
     if (loggedUser && loggedUser.status === 200) {
-      alert(loggedUser.message);
       dispatch(getAllFavoriteMovies(loggedUser.token, loggedUser.user.id));
       dispatch(getAllWatchedMovies(loggedUser.token, loggedUser.user.id));
       redirect.push("/");
