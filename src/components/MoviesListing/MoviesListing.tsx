@@ -4,6 +4,7 @@ import React, { FunctionComponent, useEffect, useState } from "react";
 import InitializeMovieForm from "../InitializeMovieForm/InitializeMovieForm";
 import MovieDetail from "../MovieDetail/MovieDetail";
 import { AiOutlineClose } from "react-icons/ai";
+import { Link, Route } from "react-router-dom";
 
 // Services
 import { getMovies } from "../../services/MoviesServices";
@@ -107,20 +108,22 @@ const MoviesListing: FunctionComponent<{
       <div className="movies-listing" onScroll={handleScroll}>
         {loadedMovies.map((movie: any) => (
           <div className="movie" key={loadedMovies.indexOf(movie)}>
-            <div className="movie-image-container">
-              <img
-                className="movie-image"
-                src={posterPath + movie.poster_path}
-                alt="movie poster"
-                onMouseEnter={() =>
-                  changeBackgroundAndMovieTitle(
-                    movie.title,
-                    movie.backdrop_path
-                  )
-                }
-                onClick={() => openMovieDetails(movie)}
-              />
-            </div>
+            <Link to={`/movie/${movie.id}`}>
+              <div className="movie-image-container">
+                <img
+                  className="movie-image"
+                  src={posterPath + movie.poster_path}
+                  alt="movie poster"
+                  onMouseEnter={() =>
+                    changeBackgroundAndMovieTitle(
+                      movie.title,
+                      movie.backdrop_path
+                    )
+                  }
+                  onClick={() => openMovieDetails(movie)}
+                />
+              </div>
+            </Link>
             <div className="movie-title-container">
               <span className="movie-title">{movie.title}</span>
             </div>
@@ -141,12 +144,16 @@ const MoviesListing: FunctionComponent<{
             : { visibility: "hidden", opacity: 0 }
         }
       >
-        <AiOutlineClose
-          onClick={() => setMovieDetail(false)}
-          className="close-button"
-        />
+        <Link to="/">
+          <AiOutlineClose
+            className="close-button"
+            onClick={() => setMovieDetail(false)}
+          />
+        </Link>
         {movieDetail ? (
-          <MovieDetail movie={movieDetail} guestSessionID={guestSessionID} />
+          <Route path="/movie/:movieid">
+            <MovieDetail movie={movieDetail} guestSessionID={guestSessionID} />
+          </Route>
         ) : (
           <div />
         )}
