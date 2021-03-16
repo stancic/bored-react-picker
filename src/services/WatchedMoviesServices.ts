@@ -1,4 +1,12 @@
 import axios from "axios";
+
+// Interfaces
+export interface IAddToWatchedMovie {
+  movieId: string;
+  userId: string;
+  userToken?: string;
+}
+
 const baseurl = "http://localhost:3002/api";
 
 let token: string | null = null;
@@ -19,16 +27,28 @@ export class WatchedMoviesServices {
     return response.data;
   };
 
-  addToWatchedMovies = async (movieToAdd: Object) => {
+  addToWatchedMovies = async (movieToAdd: IAddToWatchedMovie) => {
     const config = {
       headers: { Authorization: token },
     };
-    const response = await axios.post(
-      baseurl + "/watched-movies",
-      movieToAdd,
-      config
-    );
-    return response.data;
+    try {
+      const response = await axios.post(
+        baseurl + "/watched-movies",
+        movieToAdd,
+        config
+      );
+      const res = {
+        status: response.status,
+        data: response.data,
+      };
+      return res;
+    } catch (error) {
+      const er = {
+        status: error.response.status,
+        data: error.response.data,
+      };
+      return er;
+    }
   };
 
   deleteWatchedMovie = async (movieId: number) => {
@@ -39,6 +59,10 @@ export class WatchedMoviesServices {
       baseurl + "/watched-movies/" + movieId,
       config
     );
-    return response.data;
+    const res = {
+      status: response.status,
+      data: response.data,
+    };
+    return res;
   };
 }
