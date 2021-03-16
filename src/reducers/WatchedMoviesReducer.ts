@@ -19,7 +19,7 @@ const watchedMoviesReducer = (state: any = [], action: any) => {
         return action.data;
       }
     case "ADD_TO_WATCHED":
-      if (action.responseStatus === 200) {
+      if (action.status === 200) {
         alert("Added to watched");
         return state.concat(action.data);
       } else {
@@ -84,13 +84,13 @@ export const addToWatched = (movieToAdd: IAddToWatchedMovie) => {
       );
       dispatch({
         type: "ADD_TO_WATCHED",
-        responseStatus: addToWatched.status,
+        status: addToWatched.status,
         data: watchedMovieDetails,
       });
     } else {
       dispatch({
         type: "ADD_TO_WATCHED",
-        responseStatus: addToWatched.status,
+        status: addToWatched.status,
         data: addToWatched,
       });
     }
