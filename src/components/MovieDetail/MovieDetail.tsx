@@ -102,6 +102,7 @@ const MovieDetail: FunctionComponent<Props> = ({ movie, guestSessionID }) => {
     }
   };
 
+  console.log(movieDetail.title.length);
   return (
     <div>
       <AiOutlineClose
@@ -114,7 +115,12 @@ const MovieDetail: FunctionComponent<Props> = ({ movie, guestSessionID }) => {
         }
       />
       <div className="open-movie-container">
-        <div className="open-movie-title-container">
+        <div
+          className="open-movie-title-container"
+          style={
+            movieDetail.title.length > 32 ? { flexDirection: "column" } : {}
+          }
+        >
           <h1 className="open-movie-title">{movieDetail.title}</h1>
           {loggedUser && loggedUser.status === 200 ? (
             <div className="logged-user-buttons-container">
