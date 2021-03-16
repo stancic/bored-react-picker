@@ -20,7 +20,6 @@ const favoriteMoviesReducer = (state: any = [], action: any) => {
         return action.data;
       }
     case "ADD_TO_FAVORITES":
-      console.log("act", action);
       if (action.status === 200) {
         alert("Added to favorites");
         return state.concat(action.data);
@@ -45,7 +44,7 @@ export const getAllFavoriteMovies = (userToken: string, userId: string) => {
     favoriteMovies.map(async (movie: IFavoriteMovie) => {
       favoriteMoviesWithDetails.push(await getMovieDetail(movie.movieId));
     });
-    await dispatch({
+    dispatch({
       type: "GET_ALL_FAVORITES",
       data: favoriteMoviesWithDetails,
     });
@@ -83,7 +82,6 @@ export const addToFavorites = (movieToAdd: IAddToFavoritesMovie) => {
       favoriteMovie
     );
     if (addToFavorites.status === 200) {
-      console.log(addToFavorites);
       const favoriteMovieDetails = await getMovieDetail(
         addToFavorites.data.result.movieId
       );
