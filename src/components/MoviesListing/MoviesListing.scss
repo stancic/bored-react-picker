@@ -34,7 +34,9 @@
     }
     @media (max-width: 1230px) {
       grid-template-columns: repeat(3, 1fr);
-      margin-top: 3.5em;
+    }
+    @media(max-width: 1000px) {
+      margin-top: 3.5rem;
     }
     @media (max-width: 920px) {
       grid-template-columns: repeat(2, 1fr);
