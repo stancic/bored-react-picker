@@ -2,18 +2,13 @@ import { Dispatch } from "redux";
 
 //Services
 import {
+  IAddToFavoritesMovie,
   IFavoriteMovie,
   setToken,
   FavoriteMoviesServices,
 } from "../services/FavoriteMoviesServices";
 import { getMovieDetail } from "../services/MoviesServices";
 
-// Interfaces
-interface AddToFavoritesMovie {
-  movieId: string;
-  userId: string;
-  userToken: string;
-}
 const favoriteMoviesServices = new FavoriteMoviesServices();
 
 const favoriteMoviesReducer = (state: any = [], action: any) => {
@@ -25,7 +20,14 @@ const favoriteMoviesReducer = (state: any = [], action: any) => {
         return action.data;
       }
     case "ADD_TO_FAVORITES":
-      return state.concat(action.data);
+      console.log("act", action);
+      if (action.status === 200) {
+        alert("Added to favorites");
+        return state.concat(action.data);
+      } else {
+        alert("Movie already on favorites list");
+        return state;
+      }
     case "REMOVE_FAVORITE":
       return state.filter((item: any) => item !== state[action.index]);
     default:
@@ -68,23 +70,35 @@ export const removeMovieFromFavorites = (
   };
 };
 
-export const addToFavorites = (movieToAdd: AddToFavoritesMovie) => {
+export const addToFavorites = (movieToAdd: IAddToFavoritesMovie) => {
   return async (dispatch: Dispatch<any>) => {
     const favoriteMovie = {
       movieId: movieToAdd.movieId,
       userId: movieToAdd.userId,
     };
-    setToken(movieToAdd.userToken);
+    if (movieToAdd.userToken) {
+      setToken(movieToAdd.userToken);
+    }
     const addToFavorites = await favoriteMoviesServices.addToFavoriteMovies(
       favoriteMovie
     );
-    const favoriteMovieDetails = await getMovieDetail(
-      addToFavorites.result.movieId
-    );
-    dispatch({
-      type: "ADD_TO_FAVORITES",
-      data: favoriteMovieDetails,
-    });
+    if (addToFavorites.status === 200) {
+      console.log(addToFavorites);
+      const favoriteMovieDetails = await getMovieDetail(
+        addToFavorites.data.result.movieId
+      );
+      dispatch({
+        type: "ADD_TO_FAVORITES",
+        status: addToFavorites.status,
+        data: favoriteMovieDetails,
+      });
+    } else {
+      dispatch({
+        type: "ADD_TO_FAVORITES",
+        status: addToFavorites.status,
+        data: addToFavorites,
+      });
+    }
   };
 };
 export default favoriteMoviesReducer;
