@@ -2,17 +2,12 @@ import { Dispatch } from "redux";
 
 // Services
 import {
+  IAddToWatchedMovie,
   setToken,
   WatchedMoviesServices,
 } from "../services/WatchedMoviesServices";
 import { getMovieDetail } from "../services/MoviesServices";
 
-// Interfaces
-interface AddToWatchedMovie {
-  movieId: string;
-  userId: string;
-  userToken: string;
-}
 const watchedMoviesServices = new WatchedMoviesServices();
 
 const watchedMoviesReducer = (state: any = [], action: any) => {
@@ -24,7 +19,13 @@ const watchedMoviesReducer = (state: any = [], action: any) => {
         return action.data;
       }
     case "ADD_TO_WATCHED":
-      return state.concat(action.data);
+      if (action.responseStatus === 200) {
+        alert("Added to watched");
+        return state.concat(action.data);
+      } else {
+        alert("Movie alredy on watched list");
+        return state;
+      }
     case "REMOVE_WATCHED":
       return state.filter((item: any) => item !== state[action.index]);
     default:
@@ -65,23 +66,34 @@ export const removeMovieFromWatched = (
   };
 };
 
-export const addToWatched = (movieToAdd: AddToWatchedMovie) => {
+export const addToWatched = (movieToAdd: IAddToWatchedMovie) => {
   return async (dispatch: Dispatch<any>) => {
     const watchedMovie = {
       movieId: movieToAdd.movieId,
       userId: movieToAdd.userId,
     };
-    setToken(movieToAdd.userToken);
+    if (movieToAdd.userToken) {
+      setToken(movieToAdd.userToken);
+    }
     const addToWatched = await watchedMoviesServices.addToWatchedMovies(
       watchedMovie
     );
-    const watchedMovieDetails = await getMovieDetail(
-      addToWatched.result.movieId
-    );
-    dispatch({
-      type: "ADD_TO_WATCHED",
-      data: watchedMovieDetails,
-    });
+    if (addToWatched.status === 200) {
+      const watchedMovieDetails = await getMovieDetail(
+        addToWatched.data.result.movieId
+      );
+      dispatch({
+        type: "ADD_TO_WATCHED",
+        responseStatus: addToWatched.status,
+        data: watchedMovieDetails,
+      });
+    } else {
+      dispatch({
+        type: "ADD_TO_WATCHED",
+        responseStatus: addToWatched.status,
+        data: addToWatched,
+      });
+    }
   };
 };
 export default watchedMoviesReducer;
