@@ -1,10 +1,10 @@
-import React, { FunctionComponent, useEffect, useState } from "react";
+import React, { FunctionComponent, useEffect, useRef, useState } from "react";
 
 //Components
 import InitializeMovieForm from "../InitializeMovieForm/InitializeMovieForm";
 import MovieDetail from "../MovieDetail/MovieDetail";
 import { AiOutlineClose } from "react-icons/ai";
-import { Link, Route } from "react-router-dom";
+import { Link, Route, useHistory } from "react-router-dom";
 
 // Services
 import { getMovies } from "../../services/MoviesServices";
@@ -19,6 +19,9 @@ const MoviesListing: FunctionComponent<{
   onMoviesUpdate: any;
   guestSessionID: string;
 }> = ({ movies, year, genreID, onMoviesUpdate, guestSessionID }) => {
+  const movieDetailContainerRef = useRef<any>(null);
+  const history = useHistory();
+
   const [loadedMovies, setLoadedMovies] = useState<any>(movies);
   const [movieTitle, setMovieTitle] = useState<string>("");
   const [pageNumber, setPageNumber] = useState<number>(1);
@@ -92,6 +95,28 @@ const MoviesListing: FunctionComponent<{
     setMovieDetail(movie);
   };
 
+  // Check if user clicked outside the movieDetail window
+  useEffect(() => {
+    /**
+     * Close window if user clicked outside
+     */
+    const handleClickOutside = (event: any) => {
+      if (
+        movieDetailContainerRef.current &&
+        !movieDetailContainerRef.current.contains(event.target)
+      ) {
+        setMovieDetail(false);
+        history.push("/");
+      }
+    };
+
+    // Bind the event listener
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [movieDetailContainerRef, history]);
   return (
     <div
       className="movies-listing-container"
@@ -152,7 +177,12 @@ const MoviesListing: FunctionComponent<{
         </Link>
         {movieDetail ? (
           <Route path="/movie/:movieid">
-            <MovieDetail movie={movieDetail} guestSessionID={guestSessionID} />
+            <div ref={movieDetailContainerRef}>
+              <MovieDetail
+                movie={movieDetail}
+                guestSessionID={guestSessionID}
+              />
+            </div>
           </Route>
         ) : (
           <div />
