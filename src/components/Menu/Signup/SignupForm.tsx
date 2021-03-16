@@ -10,7 +10,7 @@ import Button from "@material-ui/core/Button";
 import { userSignup } from "../../../reducers/SignupReducer";
 
 // Styles
-import "./SignupForm.scss";
+import "../Login/Form.scss";
 
 // Interfaces
 import { ISignupCredentials } from "../../../services/UserServices";
