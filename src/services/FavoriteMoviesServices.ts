@@ -10,6 +10,12 @@ export interface IFavoriteMovie {
   userId: string;
 }
 
+export interface IAddToFavoritesMovie {
+  movieId: string;
+  userId: string;
+  userToken?: string;
+}
+
 let token: string | null = null;
 
 export const setToken = (newToken: string) => {
@@ -29,16 +35,28 @@ export class FavoriteMoviesServices {
     return res;
   };
 
-  addToFavoriteMovies = async (movieToAdd: Object) => {
+  addToFavoriteMovies = async (movieToAdd: IAddToFavoritesMovie) => {
     const config = {
       headers: { Authorization: token },
     };
-    const response = await axios.post(
-      baseurl + "/favorite-movies",
-      movieToAdd,
-      config
-    );
-    return response.data;
+    try {
+      const response = await axios.post(
+        baseurl + "/favorite-movies",
+        movieToAdd,
+        config
+      );
+      const res = {
+        status: response.status,
+        data: response.data,
+      };
+      return res;
+    } catch (error) {
+      const er = {
+        status: error.response.status,
+        data: error.response.data,
+      };
+      return er;
+    }
   };
 
   deleteFavoriteMovie = async (movieId: number) => {
@@ -52,4 +70,3 @@ export class FavoriteMoviesServices {
     return response.data;
   };
 }
-// Watched
