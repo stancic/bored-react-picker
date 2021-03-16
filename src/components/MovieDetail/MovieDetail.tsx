@@ -102,7 +102,6 @@ const MovieDetail: FunctionComponent<Props> = ({ movie, guestSessionID }) => {
     }
   };
 
-  console.log(movieDetail.title.length);
   return (
     <div>
       <AiOutlineClose
