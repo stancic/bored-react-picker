@@ -1,0 +1,39 @@
+.login-form-container,
+.user-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1.3;
+  margin-left: 10em;
+  opacity: 0;
+  border: 1px solid rgb(216, 216, 216);
+  border-radius: 10px;
+  padding: 2em;
+  transition: 0.6s all ease-in-out;
+  @media (max-width: 1200px) {
+    margin-left: 0;
+    overflow-y: hidden;
+    width: 70%;
+    margin-bottom: 2em;
+  }
+  @media (max-height: 600px) {
+    margin-top: 150px;
+  }
+  .login-form,
+  .user-form {
+    display: flex;
+    flex-direction: column;
+    font-size: 2em;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2em;
+    width: 90%;
+    .input {
+      padding-bottom: 2em;
+      width: 90%;
+    }
+  }
+  .user-form-submit {
+    width: 90%;
+  }
+}
