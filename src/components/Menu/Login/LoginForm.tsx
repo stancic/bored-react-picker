@@ -10,7 +10,7 @@ import Button from "@material-ui/core/Button";
 import { logUser } from "../../../reducers/LoginReducer";
 
 // Styles
-import "./LoginForm.scss";
+import "./Form.scss";
 
 // Interfaces
 import { ILoginCredentials } from "../../../services/UserServices";
@@ -75,7 +75,7 @@ const LoginForm: FunctionComponent = () => {
             variant="contained"
             color="default"
             onClick={handleLogin}
-            className="loggedUser-form-submit"
+            className="user-form-submit"
             type="submit"
           >
             Login
