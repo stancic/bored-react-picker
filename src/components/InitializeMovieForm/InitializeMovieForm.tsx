@@ -5,28 +5,15 @@ import React, {
   useReducer,
   useState,
 } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllGenres } from "../../reducers/GenresReducer";
 
 // Services
-import { getGenres } from "../../services/GenresServices";
 import { getMovies } from "../../services/MoviesServices";
 import { TitleStateContext } from "../Context/Context";
 
 // Styles
 import "./InitializeMovieForm.scss";
-
-type DataObject = {
-  type: string;
-  data: object;
-};
-
-const genreReducer = (state: DataObject, action: any) => {
-  switch (action.type) {
-    case "initialize":
-      return action.data;
-    default:
-      return state;
-  }
-};
 
 const moviesReducer = (state: any, action: any) => {
   switch (action.type) {
@@ -42,15 +29,15 @@ const InitializeMovieForm: FunctionComponent<{
   onPageHideStatusUpdate: any;
 }> = ({ onMoviesUpdate, onPageHideStatusUpdate }: any) => {
   const titleShowState = useContext(TitleStateContext); // Loading title state
-
+  const dispatch = useDispatch();
   // Reducer states
-  const [genresState, genresDispatch] = useReducer(genreReducer, []);
+  const genresState = useSelector((store: any) => store.genres);
   const [moviesState, moviesDispatch] = useReducer(moviesReducer, []);
 
   // Used states
   const [genres, setGenres] = useState<{ id: number; name: string }[]>([]);
   const [selectedGenre, setSelectedGenre] = useState("Action"); // Genre on button click
-  const [genreID, setGenreID] = useState<number | undefined>(0); // Genre id from selected genre
+  const [genreID, setGenreID] = useState<number>(0); // Genre id from selected genre
 
   const [movies, setMovies] = useState<any>([]); // Movies state shared between components
 
@@ -59,15 +46,7 @@ const InitializeMovieForm: FunctionComponent<{
   const [year, setYear] = useState<number>(0);
   const [yearHelper, setYearHelper] = useState<number>(0);
 
-  const initilaizeGenres = async () => {
-    const genres = await getGenres();
-    genresDispatch({ type: "initialize", data: genres });
-  };
-
-  const initializeMovies = async (
-    genre: number | undefined,
-    year: number | undefined
-  ) => {
+  const initializeMovies = async (genre: number, year: number) => {
     if (year && year < 1895 && year > 2021) {
       alert("WRONG YEAR INPUT");
     } else {
@@ -99,18 +78,17 @@ const InitializeMovieForm: FunctionComponent<{
 
   // Initialize genres and animate form and title
   useEffect(() => {
-    initilaizeGenres();
+    dispatch(getAllGenres());
   }, []);
+
+  useEffect(() => {
+    setGenres(genresState.genres);
+  }, [genresState]);
 
   // Set movies every time genre is changed
   useEffect(() => {
     setMovies(moviesState);
   }, [moviesState]);
-
-  // Set genres
-  useEffect(() => {
-    setGenres(genresState.genres);
-  }, [genresState]);
 
   // Every time genreID changes, movies will change
   useEffect(() => {
