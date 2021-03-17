@@ -79,6 +79,7 @@ const InitializeMovieForm: FunctionComponent<{
   // Initialize genres and animate form and title
   useEffect(() => {
     dispatch(getAllGenres());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
