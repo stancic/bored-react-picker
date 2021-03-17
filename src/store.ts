@@ -9,6 +9,7 @@ import ratedMoviesReducer from "./reducers/RatedMoviesReducer";
 import signupReducer from "./reducers/SignupReducer";
 import watchedMoviesReducer from "./reducers/WatchedMoviesReducer";
 import { IError, IUser } from "./services/UserServices";
+import genresReducer from "./reducers/GenresReducer";
 
 // Interfaces
 interface IReducer {
@@ -17,6 +18,7 @@ interface IReducer {
   favoriteMovies: any;
   watchedMovies: any;
   ratedMovies: any;
+  genres: any;
 }
 
 const localStorage = new LocalStorage();
@@ -29,6 +31,7 @@ const reducer = combineReducers<IReducer>({
   favoriteMovies: favoriteMoviesReducer,
   watchedMovies: watchedMoviesReducer,
   ratedMovies: ratedMoviesReducer,
+  genres: genresReducer,
 });
 
 const store = createStore(
