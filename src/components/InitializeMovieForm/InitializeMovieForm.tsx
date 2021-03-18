@@ -84,12 +84,10 @@ const InitializeMovieForm: FunctionComponent<{
 
   useEffect(() => {
     setGenres(genresState.genres);
-  }, [genresState]);
+    setMovies(moviesState);
+  }, [genresState, moviesState]);
 
   // Set movies every time genre is changed
-  useEffect(() => {
-    setMovies(moviesState);
-  }, [moviesState]);
 
   // Every time genreID changes, movies will change
   useEffect(() => {
