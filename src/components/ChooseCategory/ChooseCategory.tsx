@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useState } from "react";
+import React, { FC, FunctionComponent, useEffect, useState } from "react";
 
 // Components
 import LoadingScreen from "../LoadingScreen/LoadingScreen";
@@ -10,7 +10,25 @@ import { TitleStateContext } from "../Context/Context";
 // Styles
 import "./ChooseCategory.scss";
 
-const ChooseCategory: FunctionComponent<{ onMoviesUpdate: any }> = ({
+// --- Marko pisao ---
+interface Props {
+  onMoviesUpdate: (movies: Movies[]) => void;
+}
+
+interface Genres {
+  id: string;
+  name: string;
+}
+
+interface Movies {
+  id: string;
+  name: string;
+  genres: Genres[];
+}
+
+// -- Marko pisao --
+
+const ChooseCategory: FC<{ onMoviesUpdate: any }> = ({
   onMoviesUpdate,
 }: any) => {
   const [titleShowState, setTitleShowState] = useState<boolean>(true); // Loading title state
